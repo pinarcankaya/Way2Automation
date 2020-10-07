@@ -34,7 +34,6 @@ public class TestBase {
         Driver.getDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     }
 
-
     @BeforeTest
     public void setUpTest(){
         extentReports = new ExtentReports();// ExtentReports objesi üretelim
