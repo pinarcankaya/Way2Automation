@@ -10,7 +10,7 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
-import pages.US_01_Page;
+import pages.US_01_Login_Page;
 
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
@@ -20,14 +20,14 @@ public class TestBase {
     public ExtentTest extentTest;
     public ExtentHtmlReporter extentHtmlReporter;
 
-    protected US_01_Page us01Page;
+    protected US_01_Login_Page us01Page;
     protected Actions actions;
     protected WebDriverWait wait;
 
     @BeforeMethod
     public void setup() {
-        Driver.getDriver().get(ConfigReader.getProperty("demoqa_url"));
-        us01Page = new US_01_Page();
+        Driver.getDriver().get(ConfigReader.getProperty("way2Automation_url"));
+        us01Page = new US_01_Login_Page();
         actions = new Actions(Driver.getDriver());
         wait = new WebDriverWait(Driver.getDriver(),20);
         Driver.getDriver().manage().window().maximize();
@@ -43,9 +43,9 @@ public class TestBase {
         //Rapor ile ilgili bilgileri artık buraya ekleyebiliriz
         extentReports.setSystemInfo("Environment", "Environment İsim");
         extentReports.setSystemInfo("Browser", ConfigReader.getProperty("browser"));
-        extentReports.setSystemInfo("Automation Engineer", "Ali Can");
-        extentHtmlReporter.config().setDocumentTitle("FHC Trip Reports");
-        extentHtmlReporter.config().setReportName("FHC Trip Automation Reports");
+        extentReports.setSystemInfo("Automation Engineer", "Girld Team");
+        extentHtmlReporter.config().setDocumentTitle("way2Automation Reports");
+        extentHtmlReporter.config().setReportName("way2Automation Reports");
     }
     @AfterTest
     public void tearDownTest(){
