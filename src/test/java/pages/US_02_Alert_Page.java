@@ -12,4 +12,15 @@ public class US_02_Alert_Page {
 
     @FindBy(xpath = "//a[.='Alert']")
     public WebElement alertMenu;
+
+
+    @FindBy(xpath = "//a[.='Simple Alert']")
+    public WebElement simpleAlertBaslik;
+
+    @FindBy(xpath = "//button[.='Click the button to display an alert box:']")
+    public WebElement simpleAlertButton;   ///alerti acan buton
+
+
+//    @FindBy(xpath = "//a[.='Alert']")
+//    public WebElement
 }

@@ -26,12 +26,12 @@ public class TestBase {
 
     @BeforeMethod
     public void setup() {
-        Driver.getDriver().get(ConfigReader.getProperty("way2Automation_url"));
+       // Driver.getDriver().get(ConfigReader.getProperty("way2Automation_url"));
         us01Page = new US_01_Login_Page();
         actions = new Actions(Driver.getDriver());
         wait = new WebDriverWait(Driver.getDriver(),20);
         Driver.getDriver().manage().window().maximize();
-        Driver.getDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        //Driver.getDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     }
 
     @BeforeTest
@@ -43,7 +43,7 @@ public class TestBase {
         //Rapor ile ilgili bilgileri artık buraya ekleyebiliriz
         extentReports.setSystemInfo("Environment", "Environment İsim");
         extentReports.setSystemInfo("Browser", ConfigReader.getProperty("browser"));
-        extentReports.setSystemInfo("Automation Engineer", "Girld Team");
+        extentReports.setSystemInfo("Automation Engineer", "Girls Team");
         extentHtmlReporter.config().setDocumentTitle("way2Automation Reports");
         extentHtmlReporter.config().setReportName("way2Automation Reports");
     }
@@ -53,13 +53,13 @@ public class TestBase {
     }
     @AfterMethod
     public void tearDownMethod(ITestResult result) throws IOException {
-        if (result.getStatus() == ITestResult.FAILURE) {//When test case fails, then take the screenshot and attached the report
-            String screenshotLocation = ReusableMethods.getScreenshot(result.getName());//getScreenshot is coming from ReusableMethods
-            extentTest.fail(result.getName());
-            extentTest.addScreenCaptureFromPath(screenshotLocation);//adding the screenshot to the report
-            extentTest.fail(result.getThrowable());
-        } else if (result.getStatus() == ITestResult.SKIP) {
-            extentTest.skip("Test Case is skipped: " + result.getName());
-        }
+//        if (result.getStatus() == ITestResult.FAILURE) {//When test case fails, then take the screenshot and attached the report
+//            String screenshotLocation = ReusableMethods.getScreenshot(result.getName());//getScreenshot is coming from ReusableMethods
+//            extentTest.fail(result.getName());
+//            extentTest.addScreenCaptureFromPath(screenshotLocation);//adding the screenshot to the report
+//            extentTest.fail(result.getThrowable());
+//        } else if (result.getStatus() == ITestResult.SKIP) {
+//            extentTest.skip("Test Case is skipped: " + result.getName());
+//        }
     }
 }

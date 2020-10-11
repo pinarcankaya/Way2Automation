@@ -9,8 +9,18 @@ public class US_01_Login_Page {
     public US_01_Login_Page(){
         PageFactory.initElements(Driver.getDriver(),this);
     }
-    @FindBy(xpath = "//a[.='Signin']")
+
+    @FindBy(xpath = "//h3[.='Registration Form']")
+    public WebElement RegistrationForm;
+
+    @FindBy(xpath = "//a[.='Home']")
+    public WebElement HomeText;
+
+    @FindBy(linkText = "Signin")
     public WebElement signinButton;
+
+//    @FindBy(xpath = "//a[.='Signin']")
+//    public WebElement signinButton;
 
     @FindBy(xpath = "(//input[@name='username'])[2]")
     public WebElement usernameTextBox;
@@ -20,6 +30,10 @@ public class US_01_Login_Page {
 
     @FindBy(xpath = "(//input[@class='button'])[2]")
     public WebElement submitButton;
+
+    @FindBy(xpath = "//p[@id='alert1']")
+    public  WebElement loginErrorMesaj;
+
 
 
 }
