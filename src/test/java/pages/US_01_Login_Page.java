@@ -16,11 +16,11 @@ public class US_01_Login_Page {
     @FindBy(xpath = "//a[.='Home']")
     public WebElement HomeText;
 
-    @FindBy(linkText = "Signin")
-    public WebElement signinButton;
-
-//    @FindBy(xpath = "//a[.='Signin']")
+//    @FindBy(linkText = "Signin")
 //    public WebElement signinButton;
+
+    @FindBy(xpath = "//a[.='Signin']")
+    public WebElement signinButton;
 
     @FindBy(xpath = "(//input[@name='username'])[2]")
     public WebElement usernameTextBox;

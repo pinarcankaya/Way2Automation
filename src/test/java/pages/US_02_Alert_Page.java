@@ -5,6 +5,8 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import utilities.Driver;
 
+import java.util.List;
+
 public class US_02_Alert_Page {
     public  US_02_Alert_Page(){
         PageFactory.initElements(Driver.getDriver(),this);
@@ -21,6 +23,11 @@ public class US_02_Alert_Page {
     public WebElement simpleAlertButton;   ///alerti acan buton
 
 
-//    @FindBy(xpath = "//a[.='Alert']")
-//    public WebElement
+    @FindBy(xpath = "//ul[@id='toggleNav']/li")
+    public List<WebElement> alertKutu;
+
+    @FindBy(xpath = "//iframe[@class='demo-frame']")
+    public WebElement frame;
+
+
 }

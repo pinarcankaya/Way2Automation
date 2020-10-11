@@ -1,7 +1,10 @@
 package smoketest;
 
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.Test;
 import pages.US_01_Login_Page;
 import utilities.ConfigReader;
@@ -12,9 +15,9 @@ public class US_01_Login_Test extends TestBase {
 
     US_01_Login_Page us01LoginPage=new US_01_Login_Page();
 
+
     @Test
     public void TC_001() {
-        Driver.getDriver().get(ConfigReader.getProperty("way2Automation_url"));
         Assert.assertTrue(us01LoginPage.RegistrationForm.isDisplayed());
     }
 
@@ -29,7 +32,6 @@ public class US_01_Login_Test extends TestBase {
 
     @Test
     public void TC_003() {
-        Driver.getDriver().get(ConfigReader.getProperty("way2Automation_url"));
         us01LoginPage.signinButton.click();
         us01LoginPage.usernameTextBox.sendKeys(ConfigReader.getProperty("invalid_username"));
         us01LoginPage.passwordTextBox.sendKeys(ConfigReader.getProperty("invalid_password"));
@@ -40,7 +42,6 @@ public class US_01_Login_Test extends TestBase {
 
     @Test
     public void TC_004() {
-        Driver.getDriver().get(ConfigReader.getProperty("way2Automation_url"));
         us01LoginPage.signinButton.click();
         us01LoginPage.usernameTextBox.sendKeys(ConfigReader.getProperty("invalid_username"));
         us01LoginPage.passwordTextBox.sendKeys(ConfigReader.getProperty("valid_password"));
@@ -52,12 +53,15 @@ public class US_01_Login_Test extends TestBase {
     @Test
     public void TC_005() {
         //1)yanlis username, dogru password ile giris yapilamamali
-        Driver.getDriver().get(ConfigReader.getProperty("way2Automation_url"));
         us01LoginPage.signinButton.click();
         us01LoginPage.usernameTextBox.sendKeys(ConfigReader.getProperty("valid_username"));
         us01LoginPage.passwordTextBox.sendKeys(ConfigReader.getProperty("invalid_password"));
         us01LoginPage.submitButton.click();
         wait.until(ExpectedConditions.visibilityOf(us01LoginPage.loginErrorMesaj));
         Assert.assertTrue(us01LoginPage.loginErrorMesaj.isDisplayed());
+    }
+    @AfterClass
+    public void tearDown() {
+        Driver.closeDriver();
     }
 }
