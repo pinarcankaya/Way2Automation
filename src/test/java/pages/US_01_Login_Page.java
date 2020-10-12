@@ -11,13 +11,10 @@ public class US_01_Login_Page {
     }
 
     @FindBy(xpath = "//h3[.='Registration Form']")
-    public WebElement RegistrationForm;
+    public WebElement RegistrationFormText;
 
     @FindBy(xpath = "//a[.='Home']")
     public WebElement HomeText;
-
-//    @FindBy(linkText = "Signin")
-//    public WebElement signinButton;
 
     @FindBy(xpath = "//a[.='Signin']")
     public WebElement signinButton;

@@ -18,20 +18,24 @@ public class US_01_Login_Test extends TestBase {
 
     @Test
     public void TC_001() {
-        Assert.assertTrue(us01LoginPage.RegistrationForm.isDisplayed());
+        //1)musteri http://way2automation.com/way2auto_jquery/index.php web sayfasina girebiliyor olmali
+        Assert.assertTrue(us01LoginPage.RegistrationFormText.isDisplayed());
     }
 
     @Test
     public void TC_002() {
+        //1)dogru username ve dogru password ile giris yapilabiliyor olmali
         us01LoginPage.signinButton.click();
         us01LoginPage.usernameTextBox.sendKeys(ConfigReader.getProperty("valid_username"));
         us01LoginPage.passwordTextBox.sendKeys(ConfigReader.getProperty("valid_password"));
         us01LoginPage.submitButton.click();
+        //wait eklenebilir
         Assert.assertTrue(us01LoginPage.HomeText.isDisplayed());
     }
 
     @Test
     public void TC_003() {
+        //1)yanlis username, dogru password ile giris yapilamamali
         us01LoginPage.signinButton.click();
         us01LoginPage.usernameTextBox.sendKeys(ConfigReader.getProperty("invalid_username"));
         us01LoginPage.passwordTextBox.sendKeys(ConfigReader.getProperty("invalid_password"));
@@ -42,21 +46,24 @@ public class US_01_Login_Test extends TestBase {
 
     @Test
     public void TC_004() {
+        //1)yanlis username, dogru password ile giris yapilamamali
         us01LoginPage.signinButton.click();
         us01LoginPage.usernameTextBox.sendKeys(ConfigReader.getProperty("invalid_username"));
         us01LoginPage.passwordTextBox.sendKeys(ConfigReader.getProperty("valid_password"));
         us01LoginPage.submitButton.click();
+
         wait.until(ExpectedConditions.visibilityOf(us01LoginPage.loginErrorMesaj));
         Assert.assertTrue(us01LoginPage.loginErrorMesaj.isDisplayed());
     }
 
     @Test
     public void TC_005() {
-        //1)yanlis username, dogru password ile giris yapilamamali
+       // 2)dogru username, yanlis password ile giris yapilamamali
         us01LoginPage.signinButton.click();
         us01LoginPage.usernameTextBox.sendKeys(ConfigReader.getProperty("valid_username"));
         us01LoginPage.passwordTextBox.sendKeys(ConfigReader.getProperty("invalid_password"));
         us01LoginPage.submitButton.click();
+
         wait.until(ExpectedConditions.visibilityOf(us01LoginPage.loginErrorMesaj));
         Assert.assertTrue(us01LoginPage.loginErrorMesaj.isDisplayed());
     }
