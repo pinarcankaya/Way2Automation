@@ -35,9 +35,11 @@ public class US_02_Alert_Test extends TestBase {
     @Test
     public void TC_006() {
         //Simple Alert butonuna tiklanabildigini assert ediniz
+
         wait.until(ExpectedConditions.visibilityOf(us02AlertPage.alertMenu));
-        //us02AlertPage.alertMenu.click();
-        Assert.assertTrue(us02AlertPage.alertMenu.isEnabled());
+        ReusableMethods.clickStaleElement(us02AlertPage.alertMenu);
+        Assert.assertTrue(us02AlertPage.simpleAlertBaslik.isEnabled()); //simple alert
+       // Assert.assertTrue(us02AlertPage.alertMenu.isEnabled()); //anasayfadaki alert menu
     }
 
     @Test
