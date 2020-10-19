@@ -33,7 +33,7 @@ public class US_02_Alert_Test extends TestBase {
     }
 
     @Test
-    public void TC_006() {
+    public void TC_004() {
         //Simple Alert butonuna tiklanabildigini assert ediniz
 
         wait.until(ExpectedConditions.visibilityOf(us02AlertPage.alertMenu));
@@ -43,7 +43,7 @@ public class US_02_Alert_Test extends TestBase {
     }
 
     @Test
-    public void TC_007() {
+    public void TC_005() {
         //"Click to button to display an alert box" yazisini iceren textbox'in tiklanabildigini assert ediniz
 
         // wait.until(ExpectedConditions.visibilityOf(us02AlertPage.alertMenu));
@@ -55,7 +55,7 @@ public class US_02_Alert_Test extends TestBase {
     }
 
     @Test
-    public void TC_008() {
+    public void TC_006() {
         //Texbox'a tikladiginizda Alert mesaj kutusunun aciliyor oldugunu dogrulayiniz
         ReusableMethods.clickStaleElement(us02AlertPage.alertMenu);
 
