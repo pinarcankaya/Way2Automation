@@ -115,4 +115,18 @@ public class ReusableMethods {
         });
         return element;
     }
+    //=====StaleElementReferenceException=====//
+    public static void clickStaleElement(WebElement element){
+        WebDriverWait wait=new WebDriverWait(Driver.getDriver(),20);
+        boolean cevir = true;
+        while (cevir) {
+            try {
+                wait.until(ExpectedConditions.elementToBeClickable(element));
+                element.click();
+                cevir = false;
+            } catch (StaleElementReferenceException e) {
+                cevir = true;
+            }
+        }
+    }
 }
