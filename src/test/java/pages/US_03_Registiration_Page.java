@@ -11,6 +11,7 @@ public class US_03_Registiration_Page {
     public US_03_Registiration_Page() {
         PageFactory.initElements(Driver.getDriver(),this);
     }
+
     @FindBy(xpath = "//a[.='Registration']")
     public WebElement registrationMenu;
 
