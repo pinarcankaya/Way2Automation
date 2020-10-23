@@ -23,7 +23,6 @@ public class US_02_Alert_Test extends TestBase {
     US_02_Alert_Page us02AlertPage = new US_02_Alert_Page();
     US_01_Login_Page us01LoginPage = new US_01_Login_Page();
 
-
     @BeforeMethod
     public void anasayfa() {
         us01LoginPage.signinButton.click();
