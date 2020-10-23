@@ -5,9 +5,11 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import utilities.Driver;
 
-public class TC_003page {
+import java.util.List;
 
-    public TC_003page(){
+public class US_03_Page {
+
+    public US_03_Page(){
         PageFactory.initElements(Driver.getDriver(),this);
     }
 
@@ -23,12 +25,14 @@ public class TC_003page {
     public WebElement mariedTextBox;
     @FindBy(xpath = "(//input[@name='m_status'])[3]")
     public WebElement divorcedTextBox;
-    @FindBy(xpath = "(//input[@name='hobby'])[1]")
-    public WebElement hobyDance;
-    @FindBy(xpath = "(//input[@name='hobby'])[1]")
-    public WebElement hobyReading;
-    @FindBy(xpath = "(//input[@name='hobby'])[1]")
-    public WebElement hobyCricket;
+//    @FindBy(xpath = "(//input[@name='hobby'])[1]")
+//    public WebElement hobyDance;
+//    @FindBy(xpath = "(//input[@name='hobby'])[2]")
+//    public WebElement hobyReading;
+//    @FindBy(xpath = "(//input[@name='hobby'])[3]")
+// public WebElement hobyCricket;
+    @FindBy(xpath = "//input[@name='hobby']")
+    public List<WebElement> hobiList;
     @FindBy(xpath = "(//select)[1]")
     public WebElement countryBox;
     @FindBy(xpath = "(//select)[2]")
@@ -53,6 +57,8 @@ public class TC_003page {
     public WebElement confirmPassword;
     @FindBy(xpath = "//input['@value=submit']")
     public WebElement submitBottun;
+    @FindBy(xpath = "//h2[.='Registration Form']")
+    public WebElement result;
 
 
 }
