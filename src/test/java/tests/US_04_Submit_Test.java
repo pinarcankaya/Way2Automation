@@ -59,16 +59,17 @@ public class US_04_Submit_Test extends TestBase {
         Driver.getDriver().switchTo().frame(us04SubmitPage.firstFrame);
 
         ReusableMethods.waitFor(2);
-        String first=us04SubmitPage.stasrtWithsubmitButton.getAttribute("id");
+        String firstText=us04SubmitPage.stasrtWithsubmitButton.getAttribute("id");
         us04SubmitPage.startWithTextBox.sendKeys("abc");
+        us04SubmitPage.stasrtWithsubmitButton.click();
 
-        String second=us04SubmitPage.stasrtWithsubmitButton.getAttribute("id");
-        Assert.assertNotEquals(first,second);
+        ReusableMethods.waitFor(2);
+        String secondText=us04SubmitPage.stasrtWithsubmitButton.getAttribute("id");
+        Assert.assertNotEquals(firstText,secondText);
 
+    }
 
-
-
-
-
+    @Test
+    public void TC_027() {
     }
 }
