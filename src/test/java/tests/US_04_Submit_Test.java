@@ -1,6 +1,8 @@
 package tests;
 
+import org.apache.commons.codec.language.bm.Rule;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.Color;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
@@ -28,7 +30,6 @@ public class US_04_Submit_Test extends TestBase {
     @Test
     public void TC_024() {
         //ana menüde Dynemic Elements başlığı altında Submit Button Clicked olduğunu assert ediniz .
-
         // wait.until(ExpectedConditions.visibilityOf(us04SubmitPage.dynamicElementMenu));
         ReusableMethods.clickStaleElement(us04SubmitPage.dynamicElementMenu);
         // actions.moveToElement(us04SubmitPage.dynamicElementMenu).perform();
@@ -71,5 +72,22 @@ public class US_04_Submit_Test extends TestBase {
 
     @Test
     public void TC_027() {
+        //Ends With menüsüne tıklandığında zemin renginin kırmızı olduğunu doğrulayınız.
+        ReusableMethods.clickStaleElement(us04SubmitPage.dynamicElementMenu);
+        us04SubmitPage.submitButton.click();
+       // us04SubmitPage.endsWith.click();
+        actions.moveToElement(us04SubmitPage.endsWith).perform();
+        String endsWithColor=us04SubmitPage.endsWith.getCssValue("background-color");
+        System.out.println(endsWithColor);
+        String hexColor= Color.fromString(endsWithColor).asHex();
+        System.out.println(hexColor);
+        Assert.assertEquals(hexColor,"#ff0000");
+    }
+
+
+    @Test
+    public void TC_028() {
+        //Complete ID Dynemıc menüsüne tıklandığında menünün yazı renginin beyaz olduğunu doğrulayınız.
+
     }
 }

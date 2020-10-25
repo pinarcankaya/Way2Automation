@@ -30,4 +30,7 @@ public class US_04_Submit_Page {
 
     @FindBy(xpath = "//iframe[@class='demo-frame']")
     public WebElement firstFrame;
+
+    @FindBy(xpath = "//a[.='Ends With']")
+    public  WebElement endsWith;
 }
