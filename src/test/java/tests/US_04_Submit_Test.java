@@ -44,11 +44,14 @@ public class US_04_Submit_Test extends TestBase {
         ReusableMethods.clickStaleElement(us04SubmitPage.dynamicElementMenu);
         us04SubmitPage.submitButton.click();
         int list = us04SubmitPage.submitMenuList.size();
-        System.out.println("listenin uzunlugu" + list);
+        System.out.println("listenin uzunlugu :" + list);
 
         for (WebElement w : us04SubmitPage.submitMenuList) {
             System.out.println(w.getText());
         }
+
+        Assert.assertEquals(list,3);
+
     }
 
     @Test
@@ -56,16 +59,19 @@ public class US_04_Submit_Test extends TestBase {
         //Start With menüsündeki kutucuğa yazı yazılabildiğini doğrulayınız.
         ReusableMethods.clickStaleElement(us04SubmitPage.dynamicElementMenu);
         us04SubmitPage.submitButton.click();
-
         Driver.getDriver().switchTo().frame(us04SubmitPage.firstFrame);
-
         ReusableMethods.waitFor(2);
+
         String firstText=us04SubmitPage.stasrtWithsubmitButton.getAttribute("id");
+        System.out.println(firstText);//submit
+
         us04SubmitPage.startWithTextBox.sendKeys("abc");
         us04SubmitPage.stasrtWithsubmitButton.click();
 
-        ReusableMethods.waitFor(2);
+
         String secondText=us04SubmitPage.stasrtWithsubmitButton.getAttribute("id");
+        System.out.println(secondText);
+
         Assert.assertNotEquals(firstText,secondText);
 
     }
@@ -77,10 +83,13 @@ public class US_04_Submit_Test extends TestBase {
         us04SubmitPage.submitButton.click();
        // us04SubmitPage.endsWith.click();
         actions.moveToElement(us04SubmitPage.endsWith).perform();
+
         String endsWithColor=us04SubmitPage.endsWith.getCssValue("background-color");
         System.out.println(endsWithColor);
-        String hexColor= Color.fromString(endsWithColor).asHex();
+
+        String hexColor= Color.fromString(endsWithColor).asHex();//rgb kodunu hex e cevirir//#ff0000
         System.out.println(hexColor);
+
         Assert.assertEquals(hexColor,"#ff0000");
     }
 
@@ -88,6 +97,19 @@ public class US_04_Submit_Test extends TestBase {
     @Test
     public void TC_028() {
         //Complete ID Dynemıc menüsüne tıklandığında menünün yazı renginin beyaz olduğunu doğrulayınız.
+        ReusableMethods.clickStaleElement(us04SubmitPage.dynamicElementMenu);
+        us04SubmitPage.submitButton.click();
+        us04SubmitPage.completeIdDynamic.click();
+        ReusableMethods.waitFor(2);
+
+        String completeIdDynamicColor=us04SubmitPage.completeIdDynamic.getCssValue("color");
+        System.out.println(completeIdDynamicColor);
+        ReusableMethods.waitFor(2);
+
+        String hexColor=Color.fromString(completeIdDynamicColor).asHex();
+        System.out.println(hexColor);
+        Assert.assertEquals(hexColor,"#ffffff");
 
     }
+
 }

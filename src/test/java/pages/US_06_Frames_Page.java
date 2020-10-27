@@ -32,4 +32,5 @@ public class US_06_Frames_Page {
     public WebElement openMenu2;
 
 
+
 }

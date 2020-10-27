@@ -33,4 +33,9 @@ public class US_04_Submit_Page {
 
     @FindBy(xpath = "//a[.='Ends With']")
     public  WebElement endsWith;
+
+
+    @FindBy(xpath = "//a[.='Complete id Dynamic']")
+    public  WebElement completeIdDynamic;
+
 }
