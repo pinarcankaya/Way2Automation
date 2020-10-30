@@ -20,4 +20,16 @@ public class US_05_DropDown_Page {
 
     @FindBy(xpath = "//select")
     public WebElement selectCountryDropDown;
+
+//    @FindBy(xpath = "//option[.='Please Select']")
+//    public  WebElement optionMenu;.
+
+
+    @FindBy(xpath = "//a[.='Enter Country']")
+    public WebElement enterCountry;
+
+    @FindBy(xpath = "//input[@autocomplete='off']")
+    public WebElement enterCountryTextBox;
+
+
 }

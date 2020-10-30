@@ -1,5 +1,7 @@
 package tests;
 
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
@@ -43,10 +45,10 @@ public class US_05_DropDown_Test extends TestBase {
         ReusableMethods.clickStaleElement(us05DropDownPage.dynamicElementMenu);
         us05DropDownPage.dropDownMenu.click();
         Driver.getDriver().switchTo().frame(0);
-        Select selectCountry=new Select(us05DropDownPage.selectCountryDropDown);
+        Select selectCountry = new Select(us05DropDownPage.selectCountryDropDown);
         List<WebElement> countryList = selectCountry.getOptions();
         System.out.println(countryList.size());
-        Assert.assertNotEquals(countryList.size(),"479");
+        Assert.assertNotEquals(countryList.size(), "479");
     }
 
     @Test
@@ -55,29 +57,56 @@ public class US_05_DropDown_Test extends TestBase {
         ReusableMethods.clickStaleElement(us05DropDownPage.dynamicElementMenu);
         us05DropDownPage.dropDownMenu.click();
         Driver.getDriver().switchTo().frame(0);
-        Select selectCountry = new Select(us05DropDownPage.selectCountryDropDown);
 
+        Select selectCountry = new Select(us05DropDownPage.selectCountryDropDown);
         List<WebElement> countryList = selectCountry.getOptions();
-        for (WebElement w : countryList) {
-            if (w.getText().startsWith("W")) {
-                Assert.assertEquals(w.getText(), "Wallis and Futuna Islands");
-                break;
+
+//        for (WebElement w : countryList) {
+//            if (w.getText().startsWith("W")) {
+//                Assert.assertEquals(w.getText(), "Wallis and Futuna Islands");
+//                System.out.println(w.getText());
+//                break;
+//
+//            }
+//        }
+
+
+        List<String>  countryList2=new ArrayList<>();
+
+        for(WebElement w : countryList){
+            if (w.getText().startsWith("W")){
+                countryList2.add(w.getText());
+                System.out.println(w.getText());
             }
-            System.out.println(countryList.get(0).getText());
 
         }
+        System.out.println(countryList2.get(0));
+        Assert.assertEquals(countryList2.get(0),"Wallis and Futuna Islands");
+
     }
-//        List<String>  countryList2=new ArrayList<>();
-//
-//        for (WebElement w:countryList){
-//            if (w.getText().startsWith("W")){
-//                countryList2.add(w.getText());
-//                System.out.println(w.getText());
-//            }
-//
-//        }
-//        System.out.println(countryList2.get(0));
-//        Assert.assertEquals(countryList2.get(0),"Wallis and Futuna Islands");
-//
-//    }
+
+
+    @Test
+    public void TC_032() {
+        //"ENTER COUNTRY" basligi görünür oldugunu dogrulayiniz
+        ReusableMethods.clickStaleElement(us05DropDownPage.dynamicElementMenu);
+        us05DropDownPage.dropDownMenu.click();
+        Assert.assertTrue(us05DropDownPage.enterCountry.isDisplayed());
+    }
+
+    @Test
+    public void TC_033() {
+        //ENTER COUNTRY basliginin altindaki kutucuga text girilebilir oldugunu dogrulayiniz
+        ReusableMethods.clickStaleElement(us05DropDownPage.dynamicElementMenu);
+        us05DropDownPage.dropDownMenu.click();
+        ReusableMethods.waitFor(2);
+        us05DropDownPage.enterCountry.click();
+        Driver.getDriver().switchTo().frame(1);
+        us05DropDownPage.enterCountryTextBox.click();
+        us05DropDownPage.enterCountryTextBox.clear();
+        us05DropDownPage.enterCountryTextBox.sendKeys("pinar");
+
+
+    }
 }
+
