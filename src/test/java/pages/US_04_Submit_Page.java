@@ -14,13 +14,11 @@ public class US_04_Submit_Page {
     @FindBy(xpath = "//a[.='Dynamic Elements']")
     public WebElement dynamicElementMenu;
 
-
     @FindBy(xpath = "//a[.='Submit Button Clicked']")
     public WebElement submitButton;
 
     @FindBy(xpath = "//ul[@class='responsive-tabs']/li")
     public List<WebElement> submitMenuList;
-
 
     @FindBy(xpath = "//input[@type='text']")
     public WebElement startWithTextBox;

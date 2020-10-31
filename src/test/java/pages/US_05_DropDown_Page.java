@@ -31,5 +31,17 @@ public class US_05_DropDown_Page {
     @FindBy(xpath = "//input[@autocomplete='off']")
     public WebElement enterCountryTextBox;
 
+    @FindBy(xpath = "//div[@role='log']/div")
+    public WebElement hataMesaji;
+
+    @FindBy(xpath = "//span[@class='ui-button-icon-primary ui-icon ui-icon-triangle-1-s']")
+    public  WebElement okMenu;
+
+    @FindBy(xpath = "//div[.='Show All Items']")
+    public WebElement showAllItems;
+
+    @FindBy(xpath = "//li[@tabindex='-1']")
+    public List<WebElement> ikiulke;
+
 
 }

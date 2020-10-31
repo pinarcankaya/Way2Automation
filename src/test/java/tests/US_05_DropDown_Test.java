@@ -105,6 +105,42 @@ public class US_05_DropDown_Test extends TestBase {
         us05DropDownPage.enterCountryTextBox.click();
         us05DropDownPage.enterCountryTextBox.clear();
         us05DropDownPage.enterCountryTextBox.sendKeys("pinar");
+        String hataText=us05DropDownPage.hataMesaji.getText();
+        ReusableMethods.waitFor(2);
+       // Assert.assertTrue(us05DropDownPage.hataMesaji.getText().contains("pinar"));
+
+    }
+
+    @Test
+    public void TC_034() {
+        //ok isareti olan butonun üzerine gelindiginde "Show All Items" yazisinin görünür oldugunu dogrulayiniz
+        ReusableMethods.clickStaleElement(us05DropDownPage.dynamicElementMenu);
+        us05DropDownPage.dropDownMenu.click();
+        ReusableMethods.waitFor(2);
+        us05DropDownPage.enterCountry.click();
+        Driver.getDriver().switchTo().frame(1);
+        actions.moveToElement(us05DropDownPage.okMenu).perform();
+        Assert.assertTrue(us05DropDownPage.okMenu.isDisplayed());
+
+    }
+
+    @Test
+    public void testName() {
+        //"alb" text i girildiginde "Albania" ve "Svalbard and Jan Mayen Islands" ulkelerinin gorulur oldugunu dogrulayiniz
+        ReusableMethods.clickStaleElement(us05DropDownPage.dynamicElementMenu);
+        us05DropDownPage.dropDownMenu.click();
+        ReusableMethods.waitFor(2);
+        us05DropDownPage.enterCountry.click();
+        Driver.getDriver().switchTo().frame(1);
+        us05DropDownPage.enterCountryTextBox.click();
+        us05DropDownPage.enterCountryTextBox.clear();
+
+        us05DropDownPage.enterCountryTextBox.sendKeys("alb");
+        ReusableMethods.waitFor(2);
+         for (WebElement  w: us05DropDownPage.ikiulke){
+             System.out.println(w.getText());
+             Assert.assertTrue(w.isDisplayed());
+         }
 
 
     }
