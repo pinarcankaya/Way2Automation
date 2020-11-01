@@ -48,8 +48,8 @@ public class US_05_Dropdown_Test extends TestBase {
         wait.until(ExpectedConditions.visibilityOf(page.dropdownMenu));
         page.dropdownMenu.click();
         page.selectCauntry.click();
-        //Driver.getDriver().switchTo().frame(page.iframe1);
-        Driver.getDriver().switchTo().frame(0);
+        //Driver.getDriver().switchTo().frame(page.iframe1); // 1. yol
+        Driver.getDriver().switchTo().frame(0);  // 2.yol
         Select selectCauntry = new Select(page.pleaseSelect);
 
         List<WebElement> cauntryList = selectCauntry.getOptions();
@@ -77,11 +77,30 @@ public class US_05_Dropdown_Test extends TestBase {
 
     }
     @Test
-    public void TC_032(){
+    public void TC_032() {
+
+        //"ENTER COUNTRY" basligi görünür oldugunu dogrulayiniz
+        ReusableMethods.clickStaleElement(page.dynamicElements);
+        wait.until(ExpectedConditions.visibilityOf(page.dropdownMenu));
+        page.dropdownMenu.click();
+        Assert.assertTrue(page.enterCauntry.isDisplayed());
 
     }
+    @Test
+    public void TC_033(){
+        //ENTER COUNTRY basliginin altindaki kutucuga text girilebilir oldugunu dogrulayiniz
+        ReusableMethods.clickStaleElement(page.dynamicElements);
+        wait.until(ExpectedConditions.visibilityOf(page.dropdownMenu));
+        page.dropdownMenu.click();
+        page.enterCauntry.click();
+        Driver.getDriver().switchTo().frame(1);
+        page.enterTextBox.click();
+        page.enterTextBox.clear();
+        page.enterTextBox.sendKeys("abc");
+        wait.until(ExpectedConditions.visibilityOf(page.message));
+        Assert.assertTrue(page.message.isDisplayed());
 
 
-
+    }
 
     }

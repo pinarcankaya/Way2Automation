@@ -28,11 +28,14 @@ public class US_05_Dropdown_Page {
     @FindBy(xpath = "//a[.='Enter Country']")
     public WebElement enterCauntry;
 
-    @FindBy(tagName = "//input")
+    @FindBy(xpath = "//input")
     public WebElement enterTextBox;
 
     @FindBy(xpath = "(//iframe)[1]")
     public WebElement iframe1;
+
+    @FindBy(xpath = "//div[@role='log']/div")
+    public WebElement message;
 
 
 
