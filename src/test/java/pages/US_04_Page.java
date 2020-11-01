@@ -21,14 +21,21 @@ public class US_04_Page {
 
     @FindBy(xpath = "//ul[@class='responsive-tabs']/li")
     public List<WebElement> submitButtonList;
+
     //@FindBy(xpath = "//a[@target='_self']")
     //public List<WebElement> submitButtonList2;
+
     @FindBy(xpath = "//input[@type='text']")
     public WebElement startsWithTestBox;
+
     @FindBy(xpath= "//input[@name='submit']")
     public WebElement startsWithsubmitButton;
+
   @FindBy(xpath = "//a[.='Ends With']")
     public WebElement endsWith;
+
+  @FindBy(xpath = "//a[.='Complete id Dynamic']")
+    public WebElement completeIdDynamic;
 }
 
 

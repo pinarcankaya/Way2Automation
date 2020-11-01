@@ -29,7 +29,7 @@ public class US_04_Test extends TestBase {
     }
 
     @Test
-    public void dynamicElement() {
+    public void TC_024t() {
         //  ana menüde Dynemic Elements başlığı altında Submit Button Clicked olduğunu assert ediniz .
         wait.until(ExpectedConditions.elementToBeClickable(us04Page.dynamicElements));
         //us04Page.dynamicElements.click();
@@ -40,7 +40,7 @@ public class US_04_Test extends TestBase {
     }
 
     @Test
-    public void startsWith() {
+    public void TC_025() {
         // Submit sayfasında 3 tane menü olduğunu doğrulayınız
        // wait.until(ExpectedConditions.elementToBeClickable(us04Page.dynamicElements));
         ReusableMethods.clickStaleElement(us04Page.dynamicElements);
@@ -54,7 +54,7 @@ public class US_04_Test extends TestBase {
     }
 
     @Test
-    public void startsWithMenu() {
+    public void TC_026() {
         //Start With menüsündeki kutucuğa yazı yazılabildiğini doğrulayınız.
         wait.until(ExpectedConditions.elementToBeClickable(us04Page.dynamicElements));
         ReusableMethods.clickStaleElement(us04Page.dynamicElements);
@@ -75,7 +75,7 @@ public class US_04_Test extends TestBase {
     }
 
     @Test
-    public void endstsWithMenu() {
+    public void TC_027() {
         //Ends With menüsüne tıklandığında zemin renginin kırmızı olduğunu doğrulayınız.
         ReusableMethods.clickStaleElement(us04Page.dynamicElements);
         us04Page.submitButtonMenu.click();
@@ -90,6 +90,25 @@ public class US_04_Test extends TestBase {
 
 
         // Complete ID Dynemıc menüsüne tıklandığında menünün yazı renginin beyaz olduğunu doğrulayınız.
+    }
+    @Test
+    public void  TC_028(){
+        //Complete ID Dynemıc menüsüne tıklandığında menünün yazı renginin beyaz olduğunu doğrulayınız
+        ReusableMethods.clickStaleElement(us04Page.dynamicElements);
+        us04Page.submitButtonMenu.click();
+        us04Page.completeIdDynamic.click();
+        ReusableMethods.waitFor(2);
+
+        String completeIdDynamicColor=us04Page.completeIdDynamic.getCssValue("color");
+        System.out.println(completeIdDynamicColor);
+        ReusableMethods.waitFor(2);
+
+        String hexColor=Color.fromString(completeIdDynamicColor).asHex();
+        System.out.println(hexColor);
+        Assert.assertEquals(hexColor,"#ffffff");
+
+
+
     }
 
 }
