@@ -16,7 +16,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
+
 public class ReusableMethods {
+
     public static String getScreenshot(String name) throws IOException {
         String date = new SimpleDateFormat("yyyyMMddhhmmss").format(new Date());
         TakesScreenshot ts = (TakesScreenshot) Driver.getDriver();
@@ -26,7 +28,6 @@ public class ReusableMethods {
         FileUtils.copyFile(source, finalDestination);
         return target;
     }
-
     //========Switching Window=====//
     public static void switchToWindow(String targetTitle) {
         String origin = Driver.getDriver().getWindowHandle();
@@ -38,13 +39,11 @@ public class ReusableMethods {
         }
         Driver.getDriver().switchTo().window(origin);
     }
-
     //========Hover Over=====//
     public static void hover(WebElement element) {
         Actions actions = new Actions(Driver.getDriver());
         actions.moveToElement(element).perform();
     }
-
     //==========Return a list of string given a list of Web Element====////
     public static List<String> getElementsText(List<WebElement> list) {
         List<String> elemTexts = new ArrayList<>();
@@ -55,7 +54,6 @@ public class ReusableMethods {
         }
         return elemTexts;
     }
-
     //========Returns the Text of the element given an element locator==//
     public static List<String> getElementsText(By locator) {
         List<WebElement> elems = Driver.getDriver().findElements(locator);
@@ -67,7 +65,6 @@ public class ReusableMethods {
         }
         return elemTexts;
     }
-
     //===============Explicit Wait==============//
     public static void waitFor(int sec) {
         try {
@@ -76,27 +73,22 @@ public class ReusableMethods {
             e.printStackTrace();
         }
     }
-
     public static WebElement waitForVisibility(WebElement element, int timeToWaitInSec) {
         WebDriverWait wait = new WebDriverWait(Driver.getDriver(), timeToWaitInSec);
         return wait.until(ExpectedConditions.visibilityOf(element));
     }
-
     public static WebElement waitForVisibility(By locator, int timeout) {
         WebDriverWait wait = new WebDriverWait(Driver.getDriver(), timeout);
         return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
     }
-
     public static WebElement waitForClickablility(WebElement element, int timeout) {
         WebDriverWait wait = new WebDriverWait(Driver.getDriver(), timeout);
         return wait.until(ExpectedConditions.elementToBeClickable(element));
     }
-
     public static WebElement waitForClickablility(By locator, int timeout) {
         WebDriverWait wait = new WebDriverWait(Driver.getDriver(), timeout);
         return wait.until(ExpectedConditions.elementToBeClickable(locator));
     }
-
     public static void waitForPageToLoad(long timeOutInSeconds) {
         ExpectedCondition<Boolean> expectation = new ExpectedCondition<Boolean>() {
             public Boolean apply(WebDriver driver) {
@@ -112,9 +104,9 @@ public class ReusableMethods {
                     "Timeout waiting for Page Load Request to complete after " + timeOutInSeconds + " seconds");
         }
     }
-
     //======Fluent Wait====//
-    public static WebElement fluentWait(final WebElement webElement, int timeinsec) {
+    public static WebElement fluentWait(final WebElement webElement, int timeinsec)
+    {
         FluentWait<WebDriver> wait = new FluentWait<WebDriver>(Driver.getDriver())
                 .withTimeout(timeinsec, TimeUnit.SECONDS).pollingEvery(timeinsec, TimeUnit.SECONDS)
                 .ignoring(NoSuchElementException.class);
@@ -122,21 +114,22 @@ public class ReusableMethods {
             public WebElement apply(WebDriver driver) {
                 return webElement;
             }
+        });
+        return element;
     }
 
-        //=====StaleElementReferenceException=====//
-        public static void clickStaleElement (WebElement element){
-            WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 20);
-            boolean cevir = true;
-            while (cevir) {
-                try {
-                    wait.until(ExpectedConditions.elementToBeClickable(element));
-                    element.click();
-                    cevir = false;
-                } catch (StaleElementReferenceException e) {
-                    cevir = true;
-                }
+    //=====StaleElementReferenceException=====//
+    public static void clickStaleElement(WebElement element){
+        WebDriverWait wait=new WebDriverWait(Driver.getDriver(),20);
+        boolean cevir = true;
+        while (cevir) {
+            try {
+                wait.until(ExpectedConditions.elementToBeClickable(element));
+                element.click();
+                cevir = false;
+            } catch (StaleElementReferenceException e) {
+                cevir = true;
             }
         }
-
+    }
 }
