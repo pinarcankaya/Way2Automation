@@ -11,6 +11,7 @@ public class US_05_DropDown_Page {
     public US_05_DropDown_Page(){
         PageFactory.initElements(Driver.getDriver(),this);
     }
+
     @FindBy(xpath = "//a[.='Dynamic Elements']")
     public WebElement dynamicElementMenu;
 

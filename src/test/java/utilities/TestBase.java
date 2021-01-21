@@ -1,8 +1,8 @@
 package utilities;
 
-import com.aventstack.extentreports.ExtentReports;
-import com.aventstack.extentreports.ExtentTest;
-import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
+//import com.aventstack.extentreports.ExtentReports;
+//import com.aventstack.extentreports.ExtentTest;
+//import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.ITestResult;
@@ -16,9 +16,9 @@ import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 public class TestBase {
-    public ExtentReports extentReports;
-    public ExtentTest extentTest;
-    public ExtentHtmlReporter extentHtmlReporter;
+//    public ExtentReports extentReports;
+//    public ExtentTest extentTest;
+//    public ExtentHtmlReporter extentHtmlReporter;
 
     protected US_01_Login_Page us01Page;
     protected Actions actions;
@@ -32,7 +32,13 @@ public class TestBase {
         wait = new WebDriverWait(Driver.getDriver(),20);
         Driver.getDriver().manage().window().maximize();
         Driver.getDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+
+
     }
+
+
+
+
 
 //    @BeforeTest
 //    public void setUpTest(){

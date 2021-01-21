@@ -14,6 +14,8 @@ import utilities.Driver;
 import utilities.ReusableMethods;
 import utilities.TestBase;
 
+import java.util.Scanner;
+
 public class US_04_Submit_Test extends TestBase {
 
     US_01_Login_Page us01LoginPage = new US_01_Login_Page();
@@ -56,25 +58,31 @@ public class US_04_Submit_Test extends TestBase {
 
     @Test
     public void TC_026() {
-        //Start With menüsündeki kutucuğa yazı yazılabildiğini doğrulayınız.
-        ReusableMethods.clickStaleElement(us04SubmitPage.dynamicElementMenu);
-        us04SubmitPage.submitButton.click();
-        Driver.getDriver().switchTo().frame(us04SubmitPage.firstFrame);
-        ReusableMethods.waitFor(2);
+//        //Start With menüsündeki kutucuğa yazı yazılabildiğini doğrulayınız.
+//        ReusableMethods.clickStaleElement(us04SubmitPage.dynamicElementMenu);
+//        us04SubmitPage.submitButton.click();
+//        Driver.getDriver().switchTo().frame(us04SubmitPage.firstFrame);
+//        ReusableMethods.waitFor(2);
+//
+//        String firstText=us04SubmitPage.stasrtWithsubmitButton.getAttribute("id");
+//        System.out.println(firstText);//submit
+//
+//        us04SubmitPage.startWithTextBox.sendKeys("abc");
+//        us04SubmitPage.stasrtWithsubmitButton.click();
+//
+//
+//        String secondText=us04SubmitPage.stasrtWithsubmitButton.getAttribute("id");
+//        System.out.println(secondText);
+//
+//        Assert.assertNotEquals(firstText,secondText);
 
-        String firstText=us04SubmitPage.stasrtWithsubmitButton.getAttribute("id");
-        System.out.println(firstText);//submit
-
-        us04SubmitPage.startWithTextBox.sendKeys("abc");
-        us04SubmitPage.stasrtWithsubmitButton.click();
-
-
-        String secondText=us04SubmitPage.stasrtWithsubmitButton.getAttribute("id");
-        System.out.println(secondText);
-
-        Assert.assertNotEquals(firstText,secondText);
+        Scanner scan =new Scanner(System.in);
+        System.out.println("bir rakam giriniz");
+        int rakam=scan.nextInt();
 
     }
+
+
 
     @Test
     public void TC_027() {

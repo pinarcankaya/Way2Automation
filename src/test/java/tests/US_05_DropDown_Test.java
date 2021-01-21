@@ -45,6 +45,7 @@ public class US_05_DropDown_Test extends TestBase {
         ReusableMethods.clickStaleElement(us05DropDownPage.dynamicElementMenu);
         us05DropDownPage.dropDownMenu.click();
         Driver.getDriver().switchTo().frame(0);
+
         Select selectCountry = new Select(us05DropDownPage.selectCountryDropDown);
         List<WebElement> countryList = selectCountry.getOptions();
         System.out.println(countryList.size());
@@ -104,10 +105,11 @@ public class US_05_DropDown_Test extends TestBase {
         Driver.getDriver().switchTo().frame(1);
         us05DropDownPage.enterCountryTextBox.click();
         us05DropDownPage.enterCountryTextBox.clear();
-        us05DropDownPage.enterCountryTextBox.sendKeys("pinar");
-        String hataText=us05DropDownPage.hataMesaji.getText();
+        us05DropDownPage.enterCountryTextBox.sendKeys("abc");
+
+        //String hataText=us05DropDownPage.hataMesaji.getText();
         ReusableMethods.waitFor(2);
-       // Assert.assertTrue(us05DropDownPage.hataMesaji.getText().contains("pinar"));
+        Assert.assertTrue(us05DropDownPage.hataMesaji.isDisplayed());
 
     }
 
@@ -125,7 +127,7 @@ public class US_05_DropDown_Test extends TestBase {
     }
 
     @Test
-    public void testName() {
+    public void TC035() {
         //"alb" text i girildiginde "Albania" ve "Svalbard and Jan Mayen Islands" ulkelerinin gorulur oldugunu dogrulayiniz
         ReusableMethods.clickStaleElement(us05DropDownPage.dynamicElementMenu);
         us05DropDownPage.dropDownMenu.click();
