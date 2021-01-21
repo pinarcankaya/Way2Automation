@@ -5,21 +5,16 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import utilities.Driver;
 
-<<<<<<< HEAD
-public class US_02_Alert_Page {
-
-    public US_02_Alert_Page(){
-=======
 import java.util.List;
+
 
 public class US_02_Alert_Page {
     public  US_02_Alert_Page(){
->>>>>>> offline
+
         PageFactory.initElements(Driver.getDriver(),this);
     }
 
     @FindBy(xpath = "//a[.='Alert']")
-<<<<<<< HEAD
     public WebElement AlertMenu;
 
     @FindBy(xpath = "//a[.='Simple Alert']")
@@ -45,7 +40,7 @@ public class US_02_Alert_Page {
 
     @FindBy(xpath = "//p[@id='demo']")
     public WebElement inputDogrulamaText;
-=======
+
     public WebElement alertMenu;
 
 
@@ -63,5 +58,5 @@ public class US_02_Alert_Page {
     public WebElement frame;
 
 
->>>>>>> offline
+
 }
