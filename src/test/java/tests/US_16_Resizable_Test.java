@@ -4,8 +4,8 @@ import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
-import pages.Draggable_Page;
-import pages.Resizable_Page;
+import pages.US_14_Draggable_Page;
+import pages.US_16_Resizable_Page;
 import utilities.ConfigReader;
 import utilities.Driver;
 import utilities.ReusableMethods;
@@ -14,8 +14,8 @@ import java.util.concurrent.TimeUnit;
 
 public class US_16_Resizable_Test {
 
-    Resizable_Page resizablePage = new Resizable_Page();
-    Draggable_Page page = new Draggable_Page();
+    US_16_Resizable_Page resizablePage = new US_16_Resizable_Page();
+    US_14_Draggable_Page page = new US_14_Draggable_Page();
     Actions action = new Actions(Driver.getDriver());
 
     @BeforeTest
@@ -37,6 +37,7 @@ public class US_16_Resizable_Test {
         ReusableMethods.waitFor(1);
         Driver.getDriver().switchTo().frame(0);
         Assert.assertTrue(resizablePage.resizable2.get(0).getAttribute("style").isEmpty());
+
         action.clickAndHold(resizablePage.resiableBox.get(0)).build().perform();
         action.moveByOffset(200, 100).build().perform();
         action.release();

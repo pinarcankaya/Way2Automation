@@ -5,8 +5,8 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import utilities.Driver;
 
-public class Draggable_Page {
-    public Draggable_Page() {
+public class US_14_Draggable_Page {
+    public US_14_Draggable_Page() {
 
         PageFactory.initElements(Driver.getDriver(),this);
     }

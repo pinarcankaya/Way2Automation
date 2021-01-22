@@ -7,9 +7,9 @@ import utilities.Driver;
 
 import java.util.List;
 
-public class Resizable_Page {
+public class US_16_Resizable_Page {
 
-    public Resizable_Page() {
+    public US_16_Resizable_Page() {
 
         PageFactory.initElements(Driver.getDriver(),this);
     }

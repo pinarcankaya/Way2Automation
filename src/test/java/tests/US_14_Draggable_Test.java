@@ -5,17 +5,16 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.interactions.Actions;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
-import pages.Draggable_Page;
+import pages.US_14_Draggable_Page;
 import utilities.ConfigReader;
 import utilities.Driver;
 import utilities.ReusableMethods;
 
-import javax.swing.*;
 import java.util.concurrent.TimeUnit;
 
-public class Draggable_Test {
+public class US_14_Draggable_Test {
 
-    Draggable_Page page=new Draggable_Page();
+    US_14_Draggable_Page page=new US_14_Draggable_Page();
     Actions action = new Actions(Driver.getDriver());
     @BeforeTest
     public void testName() {

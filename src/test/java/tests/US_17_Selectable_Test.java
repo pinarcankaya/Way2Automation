@@ -1,14 +1,13 @@
 package tests;
 
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.Color;
 import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
-import pages.Draggable_Page;
-import pages.Selectable_Page;
+import pages.US_14_Draggable_Page;
+import pages.US_17_Selectable_Page;
 import utilities.ConfigReader;
 import utilities.Driver;
 import utilities.ReusableMethods;
@@ -17,8 +16,8 @@ import java.util.concurrent.TimeUnit;
 
 public class US_17_Selectable_Test {
 
-    Draggable_Page page = new Draggable_Page();
-    Selectable_Page selectablePage = new Selectable_Page();
+    US_14_Draggable_Page page = new US_14_Draggable_Page();
+    US_17_Selectable_Page selectablePage = new US_17_Selectable_Page();
     Actions action = new Actions(Driver.getDriver());
 
     @BeforeTest
@@ -30,7 +29,7 @@ public class US_17_Selectable_Test {
         page.usernameTextBox.sendKeys(ConfigReader.getProperty("valid_username"));
         page.passwordTextBox.sendKeys(ConfigReader.getProperty("valid_password"));
         page.submitButton.click();
-        //  Driver.getDriver().switchTo().defaultContent();
+
     }
 
     @Test
@@ -41,27 +40,20 @@ public class US_17_Selectable_Test {
         Driver.getDriver().switchTo().frame(0);
 
 
-//        selectablePage.itemList.get(1).click();
-//        ReusableMethods.waitFor(5);
-//        String color=selectablePage.itemList.get(1).getCssValue("background-color");
-//        ReusableMethods.waitFor(5);
-//        System.out.println(color);
-//        String hex= Color.fromString(color).asHex();
-//        System.out.println(hex);
-
         for (WebElement w : selectablePage.itemList) {
             w.click();
-            // Assert.assertTrue(w.isSelected());
-            ReusableMethods.waitFor(1);
+            Assert.assertTrue(w.isEnabled());
             String color1 = w.getCssValue("background-color");
             ReusableMethods.waitFor(1);
             System.out.println(color1);
-
+            String hex = Color.fromString(color1).asHex();
+            System.out.println(hex);
+            Assert.assertEquals(hex, "#f39814");
         }
     }
 
     @Test
-    public void display() {
+    public void displayAsGrid() {
         ReusableMethods.waitFor(1);
         selectablePage.selectablelink.click();
         // action.sendKeys(Keys.PAGE_DOWN).perform();
@@ -72,11 +64,14 @@ public class US_17_Selectable_Test {
 
         for (WebElement w : selectablePage.displayList) {
             w.click();
-            // Assert.assertTrue(w.isSelected());
+            Assert.assertTrue(w.isEnabled());
             ReusableMethods.waitFor(1);
-//            String color1=w.getCssValue("background-color");
-//            ReusableMethods.waitFor(1);
-//            System.out.println(color1);
+            String color2 = w.getCssValue("background-color");
+            ReusableMethods.waitFor(1);
+            System.out.println(color2);
+            String hex = Color.fromString(color2).asHex();
+            System.out.println(hex);
+            Assert.assertEquals(hex, "#f39814");
         }
 
     }
@@ -89,11 +84,14 @@ public class US_17_Selectable_Test {
         ReusableMethods.waitFor(1);
         Driver.getDriver().switchTo().frame(2);
 
-        for(int i=0; i<selectablePage.serializeList.size(); i++){
+        for (int i = 0; i < selectablePage.serializeList.size(); i++) {
             selectablePage.serializeList.get(i).click();
-           Assert.assertEquals(selectablePage.num.getText(),"#"+(i+1));
-            String color1 = selectablePage.serializeList.get(i).getCssValue("background-color");
+            Assert.assertEquals(selectablePage.num.getText(), "#" + (i + 1));
+            String color3 = selectablePage.serializeList.get(i).getCssValue("background-color");
             ReusableMethods.waitFor(1);
+            String hex = Color.fromString(color3).asHex();
+            System.out.println(hex);
+            Assert.assertEquals(hex, "#f39814");
         }
     }
 }

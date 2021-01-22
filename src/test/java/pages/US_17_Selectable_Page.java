@@ -7,9 +7,9 @@ import utilities.Driver;
 
 import java.util.List;
 
-public class Selectable_Page {
+public class US_17_Selectable_Page {
 
-    public Selectable_Page() {
+    public US_17_Selectable_Page() {
 
         PageFactory.initElements(Driver.getDriver(),this);
     }

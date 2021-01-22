@@ -7,8 +7,8 @@ import utilities.Driver;
 
 import java.util.List;
 
-public class Sortable_Page {
-    public Sortable_Page() {
+public class US_18_Sortable_Page {
+    public US_18_Sortable_Page() {
 
         PageFactory.initElements(Driver.getDriver(),this);
     }
