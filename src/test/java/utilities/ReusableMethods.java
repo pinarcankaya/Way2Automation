@@ -16,7 +16,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
+
 public class ReusableMethods {
+
     public static String getScreenshot(String name) throws IOException {
         String date = new SimpleDateFormat("yyyyMMddhhmmss").format(new Date());
         TakesScreenshot ts = (TakesScreenshot) Driver.getDriver();
@@ -115,6 +117,7 @@ public class ReusableMethods {
         });
         return element;
     }
+
     //=====StaleElementReferenceException=====//
     public static void clickStaleElement(WebElement element){
         WebDriverWait wait=new WebDriverWait(Driver.getDriver(),20);
