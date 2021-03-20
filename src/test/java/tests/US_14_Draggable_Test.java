@@ -3,6 +3,7 @@ package tests;
 
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.interactions.Actions;
+import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import pages.US_14_Draggable_Page;
@@ -17,7 +18,7 @@ public class US_14_Draggable_Test {
     US_14_Draggable_Page page=new US_14_Draggable_Page();
     Actions action = new Actions(Driver.getDriver());
     @BeforeTest
-    public void testName() {
+    public void login() {
         Driver.getDriver().get(ConfigReader.getProperty("way2Automation_url"));
         Driver.getDriver().manage().window().maximize();
         Driver.getDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
@@ -25,27 +26,32 @@ public class US_14_Draggable_Test {
         page.usernameTextBox.sendKeys(ConfigReader.getProperty("valid_username"));
         page.passwordTextBox.sendKeys(ConfigReader.getProperty("valid_password"));
         page.submitButton.click();
-        Driver.getDriver().switchTo().defaultContent();
+
     }
 
 
     @Test
-    public void test1() {
+    public void DefaultFonk() {
         ReusableMethods.waitFor(1);
         page.draggableLink.click();
         ReusableMethods.waitFor(2);
         Driver.getDriver().switchTo().frame(0);
         ReusableMethods.waitFor(1);
+        String styleBefore=page.dragbox.getAttribute("style");
+        System.out.println(styleBefore);
         action.clickAndHold(page.dragbox).perform();
-        //action.dragAndDropBy(page.dragbox,100,200).perform();
         ReusableMethods.waitFor(2);
         action.moveByOffset(100,150).perform();
+        action.release().build().perform();
+        String styleAfter=page.dragbox.getAttribute("style");
+        System.out.println(styleAfter);
         Driver.getDriver().switchTo().defaultContent();
-
+        Assert.assertNotEquals(styleBefore,styleAfter);
+        Assert.assertTrue(styleAfter.equals("position: relative; width: 150px; inset: 150px auto auto 100px; height: 150px;"));
     }
 
     @Test
-    public void test2() {
+    public void ConstreinMovement() {
         ReusableMethods.waitFor(1);
         action.sendKeys(Keys.PAGE_DOWN).perform();
         page.draggableLink.click();
@@ -55,7 +61,7 @@ public class US_14_Draggable_Test {
        // action.moveToElement(page.verticalBox).perform();
         action.clickAndHold(page.verticalBox).perform();
         action.moveByOffset(0,150).perform();
-      //  Driver.getDriver().switchTo().defaultContent();
+        Driver.getDriver().switchTo().defaultContent();
     }
 
     @Test
