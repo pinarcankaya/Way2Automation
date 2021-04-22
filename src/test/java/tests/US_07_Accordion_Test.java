@@ -1,5 +1,6 @@
 package tests;
 
+
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
@@ -8,6 +9,7 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import pages.US_07_Accordion_Page;
+
 import utilities.ConfigReader;
 import utilities.Driver;
 import utilities.ReusableMethods;
@@ -20,7 +22,6 @@ import java.util.concurrent.TimeUnit;
 public class US_19_Accordion_Test {
 
     US_07_Accordion_Page accordionPage = new US_07_Accordion_Page();
-    //  US_14_Draggable_Page page = new US_14_Draggable_Page();
     Actions action = new Actions(Driver.getDriver());
 
     @BeforeTest
@@ -58,8 +59,8 @@ public class US_19_Accordion_Test {
             Assert.assertTrue(w.isEnabled());
         }
 
-        int listSize = accordionPage.selectionList.size();
-        Assert.assertEquals(listSize, 4);
+        int listSize=accordionPage.selectionList.size();
+        Assert.assertEquals(listSize,4);
 
 
         //Assertion 1.yol
@@ -69,7 +70,7 @@ public class US_19_Accordion_Test {
         Assert.assertTrue(accordionPage.selectionList.get(3).isDisplayed());
 
         // //Assertion 2.yol
-        String section1 = accordionPage.selectionList.get(0).getText();
+        String section1=accordionPage.selectionList.get(0).getText();
         Assert.assertFalse(section1.isEmpty());
 
         //Assertion 3.yol
@@ -95,27 +96,27 @@ public class US_19_Accordion_Test {
 
         Driver.getDriver().switchTo().frame(1);
 
-        Assert.assertTrue(accordionPage.toggleIconsButton.isDisplayed());
+        Assert.assertTrue(accordionPage.toggleIconButton.isDisplayed());
 
         //toggleIcon Is NOt Display?
-        accordionPage.toggleIconsButton.click();
-        for (WebElement w : accordionPage.selectionListWithOk) {
-            Assert.assertFalse(w.isDisplayed());
+        accordionPage.toggleIconButton.click();
+//        for (WebElement w : accordionPage.selectionListWithOk) {
+//            Assert.assertFalse(w.isDisplayed());
+//        }
+
+        for (WebElement w : accordionPage.selectionList) {
+            w.click();
+            ReusableMethods.waitFor(1);
+            Assert.assertTrue(w.isEnabled());
         }
 
-//        for (WebElement w : accordionPage.selectionList) {
-//            w.click();
-//            ReusableMethods.waitFor(1);
-//            Assert.assertTrue(w.isEnabled());
-//        }
-//
-//        ReusableMethods.waitFor(2);
-//        accordionPage.selectionList.get(0).click();
-//        System.out.println(accordionPage.selection1Text.getText());
-//        Assert.assertTrue(accordionPage.selection1Text.getText().startsWith("Mauris mauris ante") && accordionPage.selection1Text.getText().endsWith("vulputate."));
-//
-//        //selection1' tiklaninca selection 2'deki text gorunmemeli
-//        Assert.assertFalse(accordionPage.selection2Text.isDisplayed());
+        ReusableMethods.waitFor(2);
+        accordionPage.selectionList.get(0).click();
+        System.out.println(accordionPage.selection1Text.getText());
+        Assert.assertTrue(accordionPage.selection1Text.getText().startsWith("Mauris mauris ante") && accordionPage.selection1Text.getText().endsWith("vulputate."));
+
+        //selection1' tiklaninca selection 2'deki text gorunmemeli
+        Assert.assertFalse(accordionPage.selection2Text.isDisplayed());
 
         //Driver.getDriver().switchTo().defaultContent();
     }
@@ -142,14 +143,14 @@ public class US_19_Accordion_Test {
 //                release(accordionPage.fillSpaceResiable).build().perform();
 
         //2.yol
-        action.dragAndDropBy(accordionPage.fillSpaceResiable, 100, 50).build().perform();
+        action.dragAndDropBy(accordionPage.fillSpaceResiable,100,50).build().perform();
 
         action.clickAndHold(accordionPage.fillSpaceResiable).moveByOffset(-100, -100).build().perform();
         // action.release();//fareyi serbest birak
         //   action.release().build().perform();//boyle de kullaniliyor
 
 
-        /*Fare Eylemleri:
+        /*Mouse Eylemleri:
 
         click () : Öğeye tıklar .
         doubleClick () : Öğeye çift ​​tıklama.
@@ -165,5 +166,3 @@ public class US_19_Accordion_Test {
 
 
     }
-}
-
