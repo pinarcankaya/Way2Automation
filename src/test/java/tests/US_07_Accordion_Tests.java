@@ -1,6 +1,6 @@
 package tests;
 
-
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
@@ -8,8 +8,8 @@ import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
-import pages.US_07_Accordion_Page;
 
+import pages.US_07_Accordion_Page;
 import utilities.ConfigReader;
 import utilities.Driver;
 import utilities.ReusableMethods;
@@ -18,8 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
-
-public class US_19_Accordion_Test {
+public class US_07_Accordion_Tests {
 
     US_07_Accordion_Page accordionPage = new US_07_Accordion_Page();
     Actions action = new Actions(Driver.getDriver());
@@ -36,17 +35,20 @@ public class US_19_Accordion_Test {
 
     }
 
+    ///WINDOWS HANDLE
     @Test
-    public void defaultFunkcionality() {//Windows handle
+    // Default Functionality'de herbir section tiklandiginda icerdigi text'e ulasilmalidir
+    // Default Functionality'e tiklandiginda Section 1-2-3-4 acildigi gorulmelidir
+    public void defaultFunkcionality() {//
         Set<String> windowsHandle = Driver.getDriver().getWindowHandles();///2 tane window var
         List<String> list = new ArrayList<>(windowsHandle);
-        Driver.getDriver().switchTo().window(list.get(1));//child windowa gitmek istiyor
+        Driver.getDriver().switchTo().window(list.get(1));//child windowa gitmek istiyoruz//yani 2.siradaki
 
 
         ReusableMethods.waitFor(2);
         accordionPage.defaultFonkMenu.click();
 
-        //  Driver.getDriver().switchTo().frame(accordionPage.iframe1);//locate ile frame'e gecis
+
         Driver.getDriver().switchTo().frame(0);
 
         action.sendKeys(Keys.ARROW_DOWN).perform();
@@ -75,50 +77,36 @@ public class US_19_Accordion_Test {
 
         //Assertion 3.yol
         Assert.assertTrue(accordionPage.selectionList.get(0).getText().
-                startsWith("Mauris mauris ante") && accordionPage.selectionList.get(0).getText().endsWith("vulputate."));
+                startsWith("Mauris mauris ante") && accordionPage.selectionList.get(0).getText().
+                endsWith("vulputate."));
     }
 
 
     @Test
-    public void customizeIcons() {
-        //String url = "http://way2automation.com/way2auto_jquery/accordion.php#load_box";
+    public void customizeIcons() {//"toggle icons" butonuna sayfada bulunmali ve  tiklandiginda islevsel olmalidir
         Set<String> windowsHandle = Driver.getDriver().getWindowHandles();
         List<String> list = new ArrayList<>(windowsHandle);
         Driver.getDriver().switchTo().window(list.get(1));
         ReusableMethods.waitFor(2);
-        // accordionPage.customizeIcons.click();
-        // action.click(accordionPage.customizeIcons).perform();
-
-
-        //click//action(click)//JSExecuter
-        JavascriptExecutor jsExecuter = (JavascriptExecutor) Driver.getDriver();
-        jsExecuter.executeScript("arguments[0].click();", accordionPage.customizeIcons);
+        accordionPage.customizeIcons.click();
 
         Driver.getDriver().switchTo().frame(1);
 
         Assert.assertTrue(accordionPage.toggleIconButton.isDisplayed());
 
-        //toggleIcon Is NOt Display?
-        accordionPage.toggleIconButton.click();
-//        for (WebElement w : accordionPage.selectionListWithOk) {
-//            Assert.assertFalse(w.isDisplayed());
-//        }
 
-        for (WebElement w : accordionPage.selectionList) {
-            w.click();
-            ReusableMethods.waitFor(1);
+        for (WebElement w: accordionPage.selectionListWithOk) {
             Assert.assertTrue(w.isEnabled());
         }
 
-        ReusableMethods.waitFor(2);
-        accordionPage.selectionList.get(0).click();
-        System.out.println(accordionPage.selection1Text.getText());
-        Assert.assertTrue(accordionPage.selection1Text.getText().startsWith("Mauris mauris ante") && accordionPage.selection1Text.getText().endsWith("vulputate."));
+        //"toggle icons" butonuna tiklandiginda " -> " iconu kaldirilmalir//
 
-        //selection1' tiklaninca selection 2'deki text gorunmemeli
-        Assert.assertFalse(accordionPage.selection2Text.isDisplayed());
+        accordionPage.toggleIconButton.click();
+        for (WebElement w : accordionPage.selectionListWithOk) {
+            Assert.assertFalse(w.isDisplayed());
+        }
 
-        //Driver.getDriver().switchTo().defaultContent();
+
     }
 
     @Test
@@ -126,7 +114,8 @@ public class US_19_Accordion_Test {
         Set<String> windowsHandle = Driver.getDriver().getWindowHandles();
         List<String> list = new ArrayList<>(windowsHandle);
         Driver.getDriver().switchTo().window(list.get(1));
-        // System.out.println(Driver.getDriver().getTitle());
+
+
         ReusableMethods.waitFor(2);
         accordionPage.fillspace.click();
         Driver.getDriver().switchTo().frame(2);
@@ -139,23 +128,21 @@ public class US_19_Accordion_Test {
         ReusableMethods.waitFor(1);
 
         //1.yol
-//        action.clickAndHold(accordionPage.fillSpaceResiable).moveByOffset(100,50).
-//                release(accordionPage.fillSpaceResiable).build().perform();
+        action.clickAndHold(accordionPage.fillSpaceResiable).moveByOffset(100,50).
+                release(accordionPage.fillSpaceResiable).build().perform();
 
-        //2.yol
+        //2.yol///DROG AND DROP ILE BUTUP KUCULTME
         action.dragAndDropBy(accordionPage.fillSpaceResiable,100,50).build().perform();
-
         action.clickAndHold(accordionPage.fillSpaceResiable).moveByOffset(-100, -100).build().perform();
-        // action.release();//fareyi serbest birak
-        //   action.release().build().perform();//boyle de kullaniliyor
+        // action.release();
+        //   action.release().build().perform();//boyle de kullanilir
 
 
-        /*Mouse Eylemleri:
+        /*Fare Eylemleri:
 
         click () : Öğeye tıklar .
         doubleClick () : Öğeye çift ​​tıklama.
         contextClick () : Öğe üzerinde bir bağlam tıklaması (sağ tıklama) gerçekleştirir.
-
         clickAndHold () : Mevcut fare konumunda bırakmadan tıklar .
         dragAndDrop (kaynak, hedef) : Kaynak konumunda tıklar ve fareyi bırakmadan önce hedef öğenin konumuna hareket eder. kaynak (yakalanacak öğe, hedef - bırakılacak öğe).
         dragAndDropBy (source, xOffset, yOffset) : Kaynak konumda tıklama ve bekletme gerçekleştirir, belirli bir uzaklık değerine göre kaydırır, ardından fareyi serbest bırakır. (X ofseti - yatay olarak kaydırmak için, Y Ofseti - dikey olarak kaydırmak için).
@@ -166,3 +153,4 @@ public class US_19_Accordion_Test {
 
 
     }
+}
