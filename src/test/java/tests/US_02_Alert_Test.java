@@ -25,7 +25,7 @@ public class US_02_Alert_Test extends TestBase {
 
     @BeforeMethod
     public void anasayfa() {
-        us02AlertPage.enterGiris.click();
+     //   us02AlertPage.enterGiris.click();
       //  us01LoginPage.signinButton.click();
        // us01LoginPage.usernameTextBox.sendKeys(ConfigReader.getProperty("valid_username"));
       //  us01LoginPage.passwordTextBox.sendKeys(ConfigReader.getProperty("valid_password"));

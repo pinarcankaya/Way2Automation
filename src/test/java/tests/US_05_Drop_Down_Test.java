@@ -1,8 +1,7 @@
 package tests;
 
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
@@ -17,10 +16,11 @@ import utilities.TestBase;
 import java.util.ArrayList;
 import java.util.List;
 
-public class US_05_DropDown_Test extends TestBase {
+public class US_05_Drop_Down_Test {
 
     US_01_Login_Page us01LoginPage = new US_01_Login_Page();
     US_05_DropDown_Page us05DropDownPage = new US_05_DropDown_Page();
+    Actions actions=new Actions(Driver.getDriver());
 
 
     @BeforeMethod
@@ -72,17 +72,17 @@ public class US_05_DropDown_Test extends TestBase {
 //        }
 
 
-        List<String>  countryList2=new ArrayList<>();
+        List<String> countryList2 = new ArrayList<>();
 
-        for(WebElement w : countryList){
-            if (w.getText().startsWith("W")){
+        for (WebElement w : countryList) {
+            if (w.getText().startsWith("W")) {
                 countryList2.add(w.getText());
                 System.out.println(w.getText());
             }
 
         }
         System.out.println(countryList2.get(0));
-        Assert.assertEquals(countryList2.get(0),"Wallis and Futuna Islands");
+        Assert.assertEquals(countryList2.get(0), "Wallis and Futuna Islands");
 
     }
 
@@ -139,12 +139,10 @@ public class US_05_DropDown_Test extends TestBase {
 
         us05DropDownPage.enterCountryTextBox.sendKeys("alb");
         ReusableMethods.waitFor(2);
-         for (WebElement  w: us05DropDownPage.ikiulke){
-             System.out.println(w.getText());
-             Assert.assertTrue(w.isDisplayed());
-         }
-
+        for (WebElement w : us05DropDownPage.ikiulke) {
+            System.out.println(w.getText());
+            Assert.assertTrue(w.isDisplayed());
+        }
 
     }
 }
-
