@@ -9,6 +9,7 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 
+import pages.US_07_Accordion_Page;
 import utilities.ConfigReader;
 import utilities.Driver;
 import utilities.ReusableMethods;
@@ -70,13 +71,18 @@ public class US_07_Accordion_Tests {
         Assert.assertTrue(accordionPage.selectionList.get(2).isDisplayed());
         Assert.assertTrue(accordionPage.selectionList.get(3).isDisplayed());
 
+        ReusableMethods.waitFor(1);
         // //Assertion 2.yol
         String section1=accordionPage.selectionList.get(0).getText();
         Assert.assertFalse(section1.isEmpty());
 
+        ReusableMethods.waitFor(1);
+
         //Assertion 3.yol
-        Assert.assertTrue(accordionPage.selectionList.get(0).getText().
-                startsWith("Mauris mauris ante") && accordionPage.selectionList.get(0).getText().
+        accordionPage.selectionList.get(0).click();
+        ReusableMethods.waitFor(1);
+        Assert.assertTrue(accordionPage.selection1Text.getText().
+                startsWith("Mauris mauris ante") && accordionPage.selection1Text.getText().
                 endsWith("vulputate."));
     }
 
@@ -97,6 +103,7 @@ public class US_07_Accordion_Tests {
         for (WebElement w: accordionPage.selectionListWithOk) {
             Assert.assertTrue(w.isEnabled());
         }
+        ReusableMethods.waitFor(1);
 
         //"toggle icons" butonuna tiklandiginda " -> " iconu kaldirilmalir//
 
