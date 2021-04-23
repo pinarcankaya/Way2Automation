@@ -5,39 +5,44 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import utilities.Driver;
 
-public class US_05_Dropdown_Page {
+import java.util.List;
 
-    public US_05_Dropdown_Page(){
-
+public class US_05_DropDown_Page {
+    public US_05_DropDown_Page(){
         PageFactory.initElements(Driver.getDriver(),this);
-
     }
 
-    @FindBy(xpath = " //a[.='Dynamic Elements']")
-    public WebElement dynamicElements;
+    @FindBy(xpath = "//a[.='Dynamic Elements']")
+    public WebElement dynamicElementMenu;
 
     @FindBy(xpath = "//a[.='Dropdown']")
-    public WebElement dropdownMenu;
+    public WebElement dropDownMenu;
 
-    @FindBy(xpath = "//a[.='Select Country']")
-    public WebElement selectCauntry;
 
     @FindBy(xpath = "//select")
-    public WebElement pleaseSelect;
+    public WebElement selectCountryDropDown;
+
+//    @FindBy(xpath = "//option[.='Please Select']")
+//    public  WebElement optionMenu;.
+
 
     @FindBy(xpath = "//a[.='Enter Country']")
-    public WebElement enterCauntry;
+    public WebElement enterCountry;
 
-    @FindBy(xpath = "//input")
-    public WebElement enterTextBox;
-
-    @FindBy(xpath = "(//iframe)[1]")
-    public WebElement iframe1;
+    @FindBy(xpath = "//input[@autocomplete='off']")
+    public WebElement enterCountryTextBox;
 
     @FindBy(xpath = "//div[@role='log']/div")
-    public WebElement message;
+    public WebElement hataMesaji;
 
+    @FindBy(xpath = "//span[@class='ui-button-icon-primary ui-icon ui-icon-triangle-1-s']")
+    public  WebElement okMenu;
 
+    @FindBy(xpath = "//div[.='Show All Items']")
+    public WebElement showAllItems;
+
+    @FindBy(xpath = "//li[@tabindex='-1']")
+    public List<WebElement> ikiulke;
 
 
 }
