@@ -53,7 +53,7 @@ public class US_08_AutoComplete_Test {
         autoCompletePage.autoInputList.get(0).sendKeys("e");  ///birinci input tag get(0)
 
         WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 2);
-        wait.until(ExpectedConditions.visibilityOf(autoCompletePage.textBoxList.get(0)));//?
+        wait.until(ExpectedConditions.visibilityOf(autoCompletePage.textBoxList.get(0)));
         System.out.println("e ==> harfinden " + autoCompletePage.textBoxList.size() + " tane var ");
         Assert.assertEquals(autoCompletePage.textBoxList.size(), 6);
 
@@ -119,6 +119,7 @@ public class US_08_AutoComplete_Test {
         autoCompletePage.multipleValuesMenu.click();
         Driver.getDriver().switchTo().frame(1);
         ReusableMethods.waitFor(1);
+
         autoCompletePage.autoInputList.get(0).click();
         autoCompletePage.autoInputList.get(0).sendKeys("b");
         autoCompletePage.textBoxList.get(0).click();
@@ -127,10 +128,14 @@ public class US_08_AutoComplete_Test {
         autoCompletePage.autoInputList.get(0).sendKeys("y");
         ReusableMethods.waitFor(1);
         autoCompletePage.textBoxList.get(0).click();
-        action.sendKeys(Keys.BACK_SPACE).perform();
-        action.sendKeys(Keys.BACK_SPACE).perform();
-        System.out.println( autoCompletePage.textBoxList.size());
-        System.out.println( autoCompletePage.textBoxList.get(0).getText());
+      //  action.sendKeys(Keys.BACK_SPACE).perform();
+       // action.sendKeys(Keys.BACK_SPACE).perform();
+       // System.out.println( autoCompletePage.textBoxList.size());
+       // System.out.println( autoCompletePage.textBoxList.get(0).getText());
+
+        for (WebElement w:autoCompletePage.textBoxList){
+            System.out.println(w.getText());
+        }
 
 
     }
@@ -145,10 +150,12 @@ public class US_08_AutoComplete_Test {
         autoCompletePage.autoInputList.get(0).click();
         autoCompletePage.autoInputList.get(0).sendKeys("a");
 
-        for(WebElement w:autoCompletePage.textBoxList){
-            System.out.println(w.getText());
 
-
+        for(WebElement w:autoCompletePage.categoriBasliklari){
+            if(w.getText().contains("People") || w.getText().contains("Products")){
+                System.out.println(w.getText());
+                Assert.assertTrue(w.isDisplayed());
+            }
             }
     }
 }

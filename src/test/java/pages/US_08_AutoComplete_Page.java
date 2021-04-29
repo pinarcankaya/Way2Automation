@@ -22,7 +22,7 @@ public class US_08_AutoComplete_Page {
 
 
     @FindBy(xpath = "//li[@class='ui-menu-item']")
-    public List<WebElement> textBoxList;  //herhangi bir harf girdikten sonra cikan sonuclar
+    public List<WebElement> textBoxList;  //herhangi bir harf girdikten sonra cikan sonuclar//3 farkli input da ayni locate'e sahip
 
 
     @FindBy(xpath = "//a[.='Multiple Values']")
@@ -31,6 +31,10 @@ public class US_08_AutoComplete_Page {
 
     @FindBy(xpath = "//a[.='Categories']")
     public WebElement categoriesMenu;
+
+    @FindBy(xpath = "//li[@class='ui-autocomplete-category']")
+    public List<WebElement> categoriBasliklari;
+
 
 }
 
