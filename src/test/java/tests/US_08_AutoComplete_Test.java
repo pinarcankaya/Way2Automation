@@ -33,29 +33,28 @@ public class US_08_AutoComplete_Test {
         Driver.getDriver().manage().window().maximize();
         Driver.getDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         accordionPage.enterGiris.click();
-        ReusableMethods.waitFor(2);
+        ReusableMethods.waitFor(1);//thread sleep
         autoCompletePage.autoCompleteMenu.click();
-        ReusableMethods.waitFor(2);
+        ReusableMethods.waitFor(1);
         Set<String> windowsHandle = Driver.getDriver().getWindowHandles();
         List<String> list = new ArrayList<>(windowsHandle);
         Driver.getDriver().switchTo().window(list.get(1));
-
     }
+
 
     //Default Functionalitye tiklandiginda textbox bolumune 'e' harfi giirldiginde 6 sonuc ciktigini dogrulayiniz
     @Test
     public void defaultFonk() {
 
-
-        ReusableMethods.waitFor(1);
-        action.sendKeys(Keys.PAGE_DOWN).perform();
         Driver.getDriver().switchTo().frame(0);
-        autoCompletePage.autoInputList.get(0).sendKeys("e");  ///birinci input tag get(0)
+        autoCompletePage.autoInputList.get(0).sendKeys("e");
+        System.out.println(" e harfinden " + autoCompletePage.allTextResult.size() + " tane var");
+        Assert.assertEquals(autoCompletePage.allTextResult.size(), 6);
 
-        WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 2);
-        wait.until(ExpectedConditions.visibilityOf(autoCompletePage.textBoxList.get(0)));
-        System.out.println("e ==> harfinden " + autoCompletePage.textBoxList.size() + " tane var ");
-        Assert.assertEquals(autoCompletePage.textBoxList.size(), 6);
+        for (WebElement w : autoCompletePage.allTextResult) {
+            System.out.println(w.getText());
+            Assert.assertTrue(w.isDisplayed());
+        }
 
 
         /////butun harfleri sirayla gonderip saydiralim
@@ -98,21 +97,22 @@ public class US_08_AutoComplete_Test {
         ReusableMethods.waitFor(1);
         Driver.getDriver().switchTo().frame(0);
         autoCompletePage.autoInputList.get(0).sendKeys("j");
-        System.out.println("j ==> harfinden " + autoCompletePage.textBoxList.size() + " tane var ");
+        System.out.println("j ==> harfinden " + autoCompletePage.allTextResult.size() + " tane var ");
 
-        boolean deger=false;
-        for(WebElement w:autoCompletePage.textBoxList){
+        boolean deger = false;
+        for (WebElement w : autoCompletePage.allTextResult) {
             System.out.println(w.getText());
-            if(w.getText().equalsIgnoreCase("Java")){
+            if (w.getText().equalsIgnoreCase("Java")) {
                 System.out.println("listin icinde java ifadesi var");
-                deger=true;
-                Assert.assertTrue(deger==true);
+                deger = true;
+                Assert.assertTrue(deger == true);
             }
 
         }
 
     }
-//Multiple Values tiklandiginda textbox bolumune birden fazla kategori yazilabildigini dogrulayiniz
+
+    //Multiple Values tiklandiginda textbox bolumune birden fazla kategori yazilabildigini dogrulayiniz
     @Test
     public void categories() {
         ReusableMethods.waitFor(1);
@@ -122,24 +122,43 @@ public class US_08_AutoComplete_Test {
 
         autoCompletePage.autoInputList.get(0).click();
         autoCompletePage.autoInputList.get(0).sendKeys("b");
-        autoCompletePage.textBoxList.get(0).click();
+        //  autoCompletePage.allTextResult.get(0).click();
+        //  System.out.println( autoCompletePage.allTextResult.get(0).getText());
         ReusableMethods.waitFor(1);
-        autoCompletePage.autoInputList.get(0).click();
+
+        for (WebElement w : autoCompletePage.allTextResult) {
+           // System.out.println(w.getText());
+            if (w.getText().equalsIgnoreCase("BASIC")) {
+                System.out.println("basic var");
+                Assert.assertTrue(w.isDisplayed());
+            }
+
+        }
+        System.out.println(autoCompletePage.allTextResult.get(0).getText());  //BASIC
+        Assert.assertTrue(autoCompletePage.allTextResult.get(0).isDisplayed());
+        autoCompletePage.allTextResult.get(0).click();
+
+
         autoCompletePage.autoInputList.get(0).sendKeys("y");
         ReusableMethods.waitFor(1);
-        autoCompletePage.textBoxList.get(0).click();
-      //  action.sendKeys(Keys.BACK_SPACE).perform();
-       // action.sendKeys(Keys.BACK_SPACE).perform();
-       // System.out.println( autoCompletePage.textBoxList.size());
-       // System.out.println( autoCompletePage.textBoxList.get(0).getText());
 
-        for (WebElement w:autoCompletePage.textBoxList){
-            System.out.println(w.getText());
+
+        for (WebElement w : autoCompletePage.allTextResult) {
+            ///System.out.println(w.getText());
+            if (w.getText().equalsIgnoreCase("Groovy")) {
+                System.out.println("groovy var");
+
+            }
         }
 
+        System.out.println(autoCompletePage.allTextResult.get(0).getText());
+
+        Assert.assertTrue(autoCompletePage.allTextResult.get(0).isDisplayed());
+        autoCompletePage.allTextResult.get(0).click();
 
     }
-//Categories tiklandiginda textbox bolumune 'a' harfi yazildiginda "Products" ve "People" basliklari gorunuyor olmali
+
+    //Categories tiklandiginda textbox bolumune 'a' harfi yazildiginda "Products" ve "People" basliklari gorunuyor olmali
     @Test
     public void TC50() {
 
@@ -151,12 +170,12 @@ public class US_08_AutoComplete_Test {
         autoCompletePage.autoInputList.get(0).sendKeys("a");
 
 
-        for(WebElement w:autoCompletePage.categoriBasliklari){
-            if(w.getText().contains("People") || w.getText().contains("Products")){
+        for (WebElement w : autoCompletePage.categoriBasliklari) {
+            if (w.getText().contains("People") || w.getText().contains("Products")) {
                 System.out.println(w.getText());
                 Assert.assertTrue(w.isDisplayed());
             }
-            }
+        }
     }
 }
 
