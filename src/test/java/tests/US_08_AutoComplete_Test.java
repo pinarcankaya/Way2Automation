@@ -43,7 +43,7 @@ public class US_08_AutoComplete_Test {
 
 
     //Default Functionalitye tiklandiginda textbox bolumune 'e' harfi giirldiginde 6 sonuc ciktigini dogrulayiniz
-    @Test
+    @Test(priority = 1)
     public void defaultFonk() {
 
         Driver.getDriver().switchTo().frame(0);
@@ -82,7 +82,7 @@ public class US_08_AutoComplete_Test {
 //                }
 //            }
 //
-//            Driver.getDriver().navigate().refresh();
+          Driver.getDriver().navigate().refresh();
 //
 //        }
 //        System.out.println(sum);///tekrarli elemanlar toplami
@@ -92,7 +92,7 @@ public class US_08_AutoComplete_Test {
     }
 
     //Default Functionalitye tiklandiginda textbox bolumune 'j' harfi girildiginde cikan listede 'java' ifadesinin gectigini dogrulayiniz
-    @Test
+    @Test(priority = 2)
     public void multipleValues() {
         ReusableMethods.waitFor(1);
         Driver.getDriver().switchTo().frame(0);
@@ -109,11 +109,12 @@ public class US_08_AutoComplete_Test {
             }
 
         }
+        Driver.getDriver().navigate().refresh();
 
     }
 
     //Multiple Values tiklandiginda textbox bolumune birden fazla kategori yazilabildigini dogrulayiniz
-    @Test
+    @Test(priority = 3)
     public void categories() {
         ReusableMethods.waitFor(1);
         autoCompletePage.multipleValuesMenu.click();
@@ -121,49 +122,43 @@ public class US_08_AutoComplete_Test {
         ReusableMethods.waitFor(1);
 
         autoCompletePage.autoInputList.get(0).click();
+        autoCompletePage.autoInputList.get(0).sendKeys("basic");
+
+        ReusableMethods.waitFor(1);
+
+
+        autoCompletePage.allTextResult.get(0).click();
+
+        autoCompletePage.autoInputList.get(0).sendKeys("cobol");
+        ReusableMethods.waitFor(1);
+        autoCompletePage.allTextResult.get(0).click();
+
+
         autoCompletePage.autoInputList.get(0).sendKeys("b");
-        //  autoCompletePage.allTextResult.get(0).click();
-        //  System.out.println( autoCompletePage.allTextResult.get(0).getText());
         ReusableMethods.waitFor(1);
 
-        for (WebElement w : autoCompletePage.allTextResult) {
+
+        for (WebElement w: autoCompletePage.allTextResult){
            // System.out.println(w.getText());
-            if (w.getText().equalsIgnoreCase("BASIC")) {
-                System.out.println("basic var");
-                Assert.assertTrue(w.isDisplayed());
-            }
+            if(w.getText().equalsIgnoreCase("basic") || w.getText().equalsIgnoreCase("cobol") )
+                System.out.println(w.getText());
+            Assert.assertTrue(w.getText().contains("BASIC") || w.getText().contains("COBOL"));
 
         }
-        System.out.println(autoCompletePage.allTextResult.get(0).getText());  //BASIC
-        Assert.assertTrue(autoCompletePage.allTextResult.get(0).isDisplayed());
-        autoCompletePage.allTextResult.get(0).click();
+        System.out.println("gecti");
 
+       // autoCompletePage.autoInputList.get(0).sendKeys("b");
 
-        autoCompletePage.autoInputList.get(0).sendKeys("y");
         ReusableMethods.waitFor(1);
-
-
-        for (WebElement w : autoCompletePage.allTextResult) {
-            ///System.out.println(w.getText());
-            if (w.getText().equalsIgnoreCase("Groovy")) {
-                System.out.println("groovy var");
-
-            }
-        }
-
-        System.out.println(autoCompletePage.allTextResult.get(0).getText());
-
-        Assert.assertTrue(autoCompletePage.allTextResult.get(0).isDisplayed());
-        autoCompletePage.allTextResult.get(0).click();
-
+        Driver.getDriver().navigate().refresh();
     }
 
     //Categories tiklandiginda textbox bolumune 'a' harfi yazildiginda "Products" ve "People" basliklari gorunuyor olmali
-    @Test
+    @Test(priority = 4)
     public void TC50() {
 
         ReusableMethods.waitFor(1);
-        autoCompletePage.categoriesMenu.click();
+      //  autoCompletePage.categoriesMenu.click();
         Driver.getDriver().switchTo().frame(2);
         ReusableMethods.waitFor(1);
         autoCompletePage.autoInputList.get(0).click();
@@ -176,7 +171,9 @@ public class US_08_AutoComplete_Test {
                 Assert.assertTrue(w.isDisplayed());
             }
         }
+        Driver.getDriver().navigate().refresh();
     }
+
 }
 
 
