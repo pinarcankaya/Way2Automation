@@ -7,9 +7,9 @@ import utilities.Driver;
 
 import java.util.List;
 
-public class US09_DatePicker_Page {
+public class US_09_DatePicker_Page {
 
-    public US09_DatePicker_Page() {
+    public US_09_DatePicker_Page() {
 
         PageFactory.initElements(Driver.getDriver(),this);
     }

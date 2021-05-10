@@ -1,14 +1,12 @@
 package tests;
 
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
-import pages.US09_DatePicker_Page;
+import pages.US_09_DatePicker_Page;
 import pages.US_07_Accordion_Page;
-import pages.US_08_AutoComplete_Page;
 import utilities.ConfigReader;
 import utilities.Driver;
 import utilities.ReusableMethods;
@@ -18,9 +16,9 @@ import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
-public class US09_DatePicker_Test {
+public class US_09_DatePicker_Test {
 
-    US09_DatePicker_Page datePickerPage = new US09_DatePicker_Page();
+    US_09_DatePicker_Page datePickerPage = new US_09_DatePicker_Page();
     US_07_Accordion_Page accordionPage = new US_07_Accordion_Page();
    // Actions action = new Actions(Driver.getDriver());
 
