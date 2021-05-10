@@ -71,9 +71,9 @@ public class US_09_DatePicker_Test {
         Select month = new Select(datePickerPage.monthDropDown);
         Select year = new Select(datePickerPage.yearDropDown);
 
-        month.selectByVisibleText("Apr");
-       // month.selectByValue("3");
-       // month.selectByIndex(3);
+        month.selectByVisibleText("Apr");  //text olarak getirir
+       // month.selectByValue("3");  //attribute degeri olarak getirir
+       // month.selectByIndex(3); //index olarak getirir
         year.selectByValue("2030");
         System.out.println(month.getFirstSelectedOption().getText());
 
