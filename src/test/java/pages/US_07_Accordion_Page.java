@@ -19,8 +19,6 @@ public class US_07_Accordion_Page {
     @FindBy(xpath = "(//a[.='ENTER TO THE TESTING WEBSITE'])[2]")
     public WebElement enterGiris;
 
-
-
     @FindBy(xpath = "//a[.='Default functionality']")
     public WebElement defaultFonkMenu;
 
