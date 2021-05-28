@@ -8,7 +8,6 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-
 import pages.US_07_Accordion_Page;
 import utilities.ConfigReader;
 import utilities.Driver;
@@ -18,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
+
 public class US_07_Accordion_Tests {
 
     US_07_Accordion_Page accordionPage = new US_07_Accordion_Page();
@@ -61,8 +61,8 @@ public class US_07_Accordion_Tests {
             Assert.assertTrue(w.isEnabled());
         }
 
-        int listSize=accordionPage.selectionList.size();
-        Assert.assertEquals(listSize,4);
+        int listSize = accordionPage.selectionList.size();
+        Assert.assertEquals(listSize, 4);
 
 
         //Assertion 1.yol
@@ -71,18 +71,13 @@ public class US_07_Accordion_Tests {
         Assert.assertTrue(accordionPage.selectionList.get(2).isDisplayed());
         Assert.assertTrue(accordionPage.selectionList.get(3).isDisplayed());
 
-        ReusableMethods.waitFor(1);
         // //Assertion 2.yol
-        String section1=accordionPage.selectionList.get(0).getText();
+        String section1 = accordionPage.selectionList.get(0).getText();
         Assert.assertFalse(section1.isEmpty());
 
-        ReusableMethods.waitFor(1);
-
         //Assertion 3.yol
-        accordionPage.selectionList.get(0).click();
-        ReusableMethods.waitFor(1);
-        Assert.assertTrue(accordionPage.selection1Text.getText().
-                startsWith("Mauris mauris ante") && accordionPage.selection1Text.getText().
+        Assert.assertTrue(accordionPage.selectionList.get(0).getText().
+                startsWith("Mauris mauris ante") && accordionPage.selectionList.get(0).getText().
                 endsWith("vulputate."));
     }
 
@@ -100,10 +95,9 @@ public class US_07_Accordion_Tests {
         Assert.assertTrue(accordionPage.toggleIconButton.isDisplayed());
 
 
-        for (WebElement w: accordionPage.selectionListWithOk) {
+        for (WebElement w : accordionPage.selectionListWithOk) {
             Assert.assertTrue(w.isEnabled());
         }
-        ReusableMethods.waitFor(1);
 
         //"toggle icons" butonuna tiklandiginda " -> " iconu kaldirilmalir//
 
@@ -134,20 +128,18 @@ public class US_07_Accordion_Tests {
         ReusableMethods.waitFor(1);
 
         //1.yol
-        action.clickAndHold(accordionPage.fillSpaceResiable).moveByOffset(100,50).
+        action.clickAndHold(accordionPage.fillSpaceResiable).moveByOffset(100, 50).
                 release(accordionPage.fillSpaceResiable).build().perform();
 
         //2.yol///DROG AND DROP ILE BUTUP KUCULTME
-        action.dragAndDropBy(accordionPage.fillSpaceResiable,100,50).build().perform();
+        action.dragAndDropBy(accordionPage.fillSpaceResiable, 100, 50).build().perform();
         action.clickAndHold(accordionPage.fillSpaceResiable).moveByOffset(-100, -100).build().perform();
         // action.release();
         //   action.release().build().perform();//boyle de kullanilir
 
-
-        /*Fare Eylemleri:
-
+  /*Fare Eylemleri:
         click () : Öğeye tıklar .
-        doubleClick () : Öğeye çift ​​tıklama.
+        doubleClick () : Öğeye çift tiklama.
         contextClick () : Öğe üzerinde bir bağlam tıklaması (sağ tıklama) gerçekleştirir.
         clickAndHold () : Mevcut fare konumunda bırakmadan tıklar .
         dragAndDrop (kaynak, hedef) : Kaynak konumunda tıklar ve fareyi bırakmadan önce hedef öğenin konumuna hareket eder. kaynak (yakalanacak öğe, hedef - bırakılacak öğe).
@@ -156,7 +148,5 @@ public class US_07_Accordion_Tests {
         moveToElement (toElement) : Fareyi öğenin merkezine kaydırır.
         release () : Mevcut fare konumunda basılı sol fare düğmesini serbest bırakır.
         */
-
-
     }
 }
