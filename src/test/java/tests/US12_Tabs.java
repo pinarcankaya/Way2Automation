@@ -38,6 +38,7 @@ public class US12_Tabs {
         Set<String> windowsHandle = Driver.getDriver().getWindowHandles();
         List<String> list = new ArrayList<>(windowsHandle);
         Driver.getDriver().switchTo().window(list.get(1));
+
     }
 
     @Test//Tabs kutucuğunun üzerine geldiğinizde,kutucuğun renginin griye dönüştüğünü  doğrulayınız.
@@ -56,9 +57,14 @@ public class US12_Tabs {
     @Test//Tab 1,Tab 2,Tab 3 Elementlerinin tıklanabiliyor ve Textbox'daki yazıların da görülebiliyor olduğunu assert ediniz.
     public void TC02() {
         Driver.getDriver().switchTo().frame(0);
-        for (WebElement w:us12TabsPage.tabsMenus){
+//        for (WebElement w:us12TabsPage.tabsMenus){
+//            w.click();
+//            Assert.assertTrue(w.isEnabled());
+//        }
+
+        for (WebElement w:us12TabsPage.alltext()){
+            //System.out.println(w.getText());
             w.click();
-            Assert.assertTrue(w.isEnabled());
             Assert.assertTrue(w.isDisplayed());
         }
     }
@@ -69,10 +75,14 @@ public class US12_Tabs {
 
         Driver.getDriver().switchTo().frame(0);
         for (WebElement w:us12TabsPage.tabsMenus){
+            String colorbefore=w.getCssValue("background-color");
+            System.out.println(colorbefore);
             w.click();
-            String color=w.getCssValue("background-color");
-            System.out.println(color);
-            Assert.assertEquals(color,"rgba(255, 255, 255, 1)");
+            String colorafter=w.getCssValue("background-color");
+            System.out.println(colorafter);
+
+            Assert.assertNotEquals(colorbefore,colorafter);
+            Assert.assertEquals(colorafter,"rgba(255, 255, 255, 1)");
         }
     }
 
