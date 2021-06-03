@@ -34,8 +34,8 @@ public class US_14_Draggable_Test {
         ReusableMethods.waitFor(1);
         draggablePage.draggableMenuLink.click();
         ReusableMethods.waitFor(1);
-        Set<String> windowsHandle=Driver.getDriver().getWindowHandles();
-        List<String> list=new ArrayList<>(windowsHandle);
+        Set<String> windowsHandle = Driver.getDriver().getWindowHandles();
+        List<String> list = new ArrayList<>(windowsHandle);
         Driver.getDriver().switchTo().window(list.get(1));
     }
 
@@ -43,11 +43,45 @@ public class US_14_Draggable_Test {
     @Test
     public void TC01() {
         Driver.getDriver().switchTo().frame(0);
-        action.dragAndDropBy(draggablePage.dragMeBox,100,150).build().perform();
-        String style=draggablePage.dragMeBox.getAttribute("style");
+        action.dragAndDropBy(draggablePage.dragMeBox, 100, 150).build().perform();
+        String style = draggablePage.dragMeBox.getAttribute("style");
         System.out.println(style);
-       // Assert.assertTrue();
+        Assert.assertTrue(style.contains("inset: 150px auto auto 100px;"));
     }
 
+    // "I can be dragged only vertically" box'in sadece dikey yonlu ,"I can be dragged only horizontally
+    // sadece yatay yonlu hareket edilebildigini assert ediniz
+    @Test
+    public void TC02() {
+        draggablePage.allDraggableMenuTabList.get(1).click();
+        Driver.getDriver().switchTo().frame(1);
 
+        //dikey hareket
+        action.dragAndDropBy(draggablePage.constrainMovementDrabBoxs.get(0), 50, 50).build().perform();
+        String beforeVerticaly = draggablePage.constrainMovementDrabBoxs.get(0).getAttribute("style");
+        System.out.println(beforeVerticaly);
+        action.dragAndDropBy(draggablePage.constrainMovementDrabBoxs.get(0), 60, 60).build().perform();
+        String afterVerticaly = draggablePage.constrainMovementDrabBoxs.get(0).getAttribute("style");
+        System.out.println(afterVerticaly);
+
+        Assert.assertTrue(beforeVerticaly.contains("left: 0px") && afterVerticaly.contains("left: 0px"));
+
+        //yatay hareket
+        action.dragAndDropBy(draggablePage.constrainMovementDrabBoxs.get(1), 50, 50).build().perform();
+        String beforeHorizontaly = draggablePage.constrainMovementDrabBoxs.get(1).getAttribute("style");
+        System.out.println(beforeHorizontaly);
+        action.dragAndDropBy(draggablePage.constrainMovementDrabBoxs.get(1), 60, 60).build().perform();
+        String afterHorizantaly = draggablePage.constrainMovementDrabBoxs.get(1).getAttribute("style");
+        System.out.println(afterHorizantaly);
+
+        Assert.assertTrue(beforeHorizontaly.contains("top: 0px") && afterHorizantaly.contains("top: 0px"));
+    }
+
+    @Test
+    public void TC03() {
+        draggablePage.allDraggableMenuTabList.get(2).click();
+        Driver.getDriver().switchTo().frame(2);
+
+
+    }
 }
