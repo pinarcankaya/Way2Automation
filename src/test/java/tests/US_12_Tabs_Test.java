@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
-public class US_12_Tabs {
+public class US_12_Tabs_Test {
 
     US_07_Accordion_Page accordionPage = new US_07_Accordion_Page();
     US_12_Tabs_Page us12TabsPage = new US_12_Tabs_Page();

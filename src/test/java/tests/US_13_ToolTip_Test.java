@@ -4,6 +4,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
@@ -47,7 +48,8 @@ public class US_13_ToolTip_Test {
         Driver.getDriver().switchTo().frame(0);
         action.moveToElement(toolTipPage.tooltipAnimationLink).perform();
         System.out.println(toolTipPage.toolTipsAnimationText.getText());
-        toolTipPage.toolTipsAnimationText.isDisplayed();
+        Assert.assertTrue(toolTipPage.toolTipsAnimationText.isDisplayed());
+        Assert.assertEquals(toolTipPage.toolTipsAnimationText.getText(), "That's what this widget is");
     }
 
 
@@ -71,10 +73,17 @@ public class US_13_ToolTip_Test {
     public void TC04() {
         toolTipPage.customAnimationDemoLink.click();
         Driver.getDriver().switchTo().frame(1);
-        for (WebElement w: toolTipPage.allActionLinks){
+        for (WebElement w : toolTipPage.allActionLinks) {
             System.out.println(w.getText());
         }
+        System.out.println(toolTipPage.allActionLinks.size());
+        Assert.assertEquals(toolTipPage.allActionLinks.size(),3);
 
+    }
+
+    @AfterClass
+    public void close(){
+        Driver.getDriver();
     }
 
 }
