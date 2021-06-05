@@ -1,13 +1,15 @@
 package tests;
 
+
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.Point;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import pages.US_07_Accordion_Page;
-import pages.US_12_Tabs_Page;
 import pages.US_14_Draggable_Page;
 import utilities.ConfigReader;
 import utilities.Driver;
@@ -58,29 +60,82 @@ public class US_14_Draggable_Test {
 
         //dikey hareket
         action.dragAndDropBy(draggablePage.constrainMovementDrabBoxs.get(0), 50, 50).build().perform();
-        String beforeVerticaly = draggablePage.constrainMovementDrabBoxs.get(0).getAttribute("style");
-        System.out.println(beforeVerticaly);
-        action.dragAndDropBy(draggablePage.constrainMovementDrabBoxs.get(0), 60, 60).build().perform();
-        String afterVerticaly = draggablePage.constrainMovementDrabBoxs.get(0).getAttribute("style");
-        System.out.println(afterVerticaly);
+        String verticalyBox = draggablePage.constrainMovementDrabBoxs.get(0).getAttribute("style");
+        System.out.println(verticalyBox);
 
-        Assert.assertTrue(beforeVerticaly.contains("left: 0px") && afterVerticaly.contains("left: 0px"));
+        Assert.assertTrue(verticalyBox.contains("left: 0px; top: 50px"));
 
         //yatay hareket
         action.dragAndDropBy(draggablePage.constrainMovementDrabBoxs.get(1), 50, 50).build().perform();
-        String beforeHorizontaly = draggablePage.constrainMovementDrabBoxs.get(1).getAttribute("style");
-        System.out.println(beforeHorizontaly);
-        action.dragAndDropBy(draggablePage.constrainMovementDrabBoxs.get(1), 60, 60).build().perform();
-        String afterHorizantaly = draggablePage.constrainMovementDrabBoxs.get(1).getAttribute("style");
-        System.out.println(afterHorizantaly);
+        String horizantalyBox = draggablePage.constrainMovementDrabBoxs.get(1).getAttribute("style");
+        System.out.println(horizantalyBox);
 
-        Assert.assertTrue(beforeHorizontaly.contains("top: 0px") && afterHorizantaly.contains("top: 0px"));
+        Assert.assertTrue(horizantalyBox.contains("left: 50px; top: 0px"));
     }
 
+    //Drag Box'lar hareket ettiginde cursor  turunun fare hareketine gore degistigini assert ediniz
+    // (move,auto,crosshair)
     @Test
     public void TC03() {
         draggablePage.allDraggableMenuTabList.get(2).click();
         Driver.getDriver().switchTo().frame(2);
+
+        for (WebElement w : draggablePage.dragMeBoxList) {
+            action.clickAndHold(w).perform();
+            //System.out.println(w.getCssValue("cursor"));
+            action.moveToElement(w, 20, 20).build().perform();
+            System.out.println(w.getCssValue("cursor"));
+
+            if (w.getCssValue("cursor").equals("move")) {
+                Assert.assertTrue(draggablePage.dragMeBoxList.get(0).getCssValue("cursor").equals("move"));
+                action.release().build().perform();
+            }
+            if (w.getCssValue("cursor").equals("crosshair")) {
+                Assert.assertTrue(draggablePage.dragMeBoxList.get(0).getCssValue("cursor").equals("crosshair"));
+                action.release().build().perform();
+            }
+            if (w.getCssValue("cursor").equals("auto")) {
+                Assert.assertTrue(draggablePage.dragMeBoxList.get(0).getCssValue("cursor").equals("auto"));
+                action.release().build().perform();
+            }
+
+
+        }
+//        Assert.assertTrue(draggablePage.dragMeBoxList.get(0).equals("move") &&
+//                draggablePage.dragMeBoxList.get(1).equals("crosshair") &&
+//                draggablePage.dragMeBoxList.get(2).equals("auto"));
+
+    }
+
+    //Drag Box suruklendiginde start,drag ve stop'taki sayilarin hareket miktarina gore arttigini assert ediniz
+    @Test
+    public void TC04() {
+        draggablePage.allDraggableMenuTabList.get(3).click();
+        Driver.getDriver().switchTo().frame(3);
+        action.dragAndDropBy(draggablePage.dragMeBox, 50, 40).build().perform();
+        action.dragAndDropBy(draggablePage.dragMeBox, 30, 50).build().perform();
+
+        for (WebElement w : draggablePage.eventAllInvoked) {
+            System.out.println(w.getText());
+
+        }
+        Assert.assertTrue(draggablePage.eventAllInvoked.get(0).getText().equals("2") && draggablePage.eventAllInvoked.get(1).getText().
+                equals("2") && draggablePage.eventAllInvoked.get(2).getText().equals("2"));
+
+
+    }
+
+    //"Drag me Down" box'in her suruklendiginde sayisinin arttigini assert ediniz(Ornek;10 kez suruklenip
+    // birakildiginda 10 tane ayni box olmali)
+    @Test
+    public void TC05() {
+        draggablePage.allDraggableMenuTabList.get(4).click();
+        Driver.getDriver().switchTo().frame(4);
+
+        action.dragAndDrop(draggablePage.dragMeButton, draggablePage.itemList.get(4)).build().perform();
+        action.release().build().perform();
+        action.dragAndDrop(draggablePage.dragMeButton, draggablePage.itemList.get(4)).build().perform();
+        action.release().build().perform();
 
 
     }
