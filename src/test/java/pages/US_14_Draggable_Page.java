@@ -34,7 +34,7 @@ public class US_14_Draggable_Page {
     @FindBy(xpath = "//span[@class='count']")
     public List<WebElement> eventAllInvoked;
 
-@FindBy(xpath = "//li[@id='draggable']")
+    @FindBy(xpath = "//li[@id='draggable']")
     public WebElement   dragMeButton;
 
     @FindBy(xpath = "//li[contains(text(),'Item')]")
