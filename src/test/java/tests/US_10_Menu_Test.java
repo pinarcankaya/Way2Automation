@@ -109,6 +109,4 @@ public class US_10_Menu_Test {
         Assert.assertTrue(menuPage.selectMenuImage.isDisplayed());
     }
 
-
-
 }
