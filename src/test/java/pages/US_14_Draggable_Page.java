@@ -14,19 +14,33 @@ public class US_14_Draggable_Page {
     }
 
     @FindBy(xpath = "//h2[.='Draggable']")
-    public WebElement draggableMenu;
-    @FindBy(xpath = "//a[@target='_self']")
-    public List<WebElement> tabsList;
+    public WebElement draggableMenuLink;
+
+
     @FindBy(xpath = "//div[@id='draggable']")
-    public WebElement draggableMeAround;
-    @FindBy(xpath = "(//div[@class='draggable ui-widget-content ui-draggable ui-draggable-handle'])[1]")
-    public WebElement vertically;
-    @FindBy(xpath = "(//div[@class='draggable ui-widget-content ui-draggable ui-draggable-handle'])[2]")
-    public WebElement horizontally;
+    public WebElement dragMeBox;
+
+    @FindBy(xpath = "//div[contains(@id,'draggable')]")
+    public List<WebElement> dragMeBoxList;
+
+
+    @FindBy(xpath = "//ul[@class='responsive-tabs']/li")
+    public List<WebElement> allDraggableMenuTabList;
+
+
+    @FindBy(xpath = "//div[@class='draggable ui-widget-content ui-draggable ui-draggable-handle']")
+    public List<WebElement> constrainMovementDrabBoxs;
+
     @FindBy(xpath = "//span[@class='count']")
     public List<WebElement> eventAllInvoked;
-    @FindBy(xpath = "//div[@id='draggable']")
-    public WebElement eventDragBox;
 
+    @FindBy(xpath = "//li[@id='draggable']")
+    public WebElement   dragMeButton;
+
+    @FindBy(xpath = "//li[contains(text(),'Item')]")
+    public List<WebElement> itemList;
+
+    @FindBy(xpath = "//li[.='Drag me down']")
+    public List<WebElement> dragMeDownButtonList;
 
 }

@@ -3,9 +3,9 @@ import java.io.FileInputStream;
 import java.util.Properties;
 public class ConfigReader {
 
-    // ConfigReader classını .properties dosyasını okumak için oluşturuyoruz.
+
     public static Properties properties;
-    // static yaptık çünkü nesne oluşturmadan doğrudan erişim sağlamak istedik
+
     static {
 
         String path = "configuration.properties";
