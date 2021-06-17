@@ -19,11 +19,13 @@ public class US_15_Droppable_Page {
     @FindBy(xpath = "//a[@target='_self']")
     public List<WebElement> tabsList;
 
+    //Kucuk kutularin locate'i
     @FindBy(xpath = "//div[contains(@id,'draggable')]")
-    public List<WebElement> draggableList;
+    public List<WebElement> draggableSmallBoxList;
 
+     //Buyuk kutularin locate'i
     @FindBy(xpath = "//div[contains(@id,'droppable')]")
-    public List<WebElement> droppableList;
+    public List<WebElement> droppableBigBoxList;
 
     @FindBy(xpath = "//h2[contains(@id,'ui-id-')]")
     public List<WebElement> productsList;
