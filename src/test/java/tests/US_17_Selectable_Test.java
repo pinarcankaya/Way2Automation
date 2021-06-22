@@ -1,4 +1,5 @@
 package tests;
+
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.Color;
 import org.testng.Assert;
@@ -14,9 +15,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
+
 public class US_17_Selectable_Test {
-    US_17_Selectable_Page selectable_page= new US_17_Selectable_Page();
-    US_07_Accordion_Page accordionPage= new US_07_Accordion_Page();
+    US_17_Selectable_Page selectable_page = new US_17_Selectable_Page();
+    US_07_Accordion_Page accordionPage = new US_07_Accordion_Page();
 
     @BeforeMethod
     public void setUP() {
@@ -35,18 +37,27 @@ public class US_17_Selectable_Test {
 
     @Test
     public void TC_090() {
-        //Item 1'i seçtiginizde kutucugun renginin "#F39814" oldugunu  yazi renginin ise " white" oldugunu Assert ediniz. ==>Default Funktionality
-        selectable_page.itemList.get(0).click();
+        //When you select Item 1, Assert that the color of the box is "#F39814" and the text color is "white". ==>Default Funktionality
         Driver.getDriver().switchTo().frame(0);
-        String rgbColor= selectable_page.itemList.get(0).getCssValue("background-color");
-        String asHexBackground= Color.fromString(rgbColor).asHex();
+        selectable_page.itemList.get(0).click();
+        String rgbColor = selectable_page.itemList.get(0).getCssValue("background-color");
+        String asHexBackground = Color.fromString(rgbColor).asHex();
         System.out.println(asHexBackground);
-        String rgbWhite= selectable_page.itemList.get(0).getCssValue("color");
-        String colorWhite= Color.fromString(rgbWhite).asHex();
-        System.out.println("White asHex "+colorWhite);
-        Assert.assertTrue(asHexBackground.contains("#f39814")&& colorWhite.contains("#ffffff"));
+        String rgbWhite = selectable_page.itemList.get(0).getCssValue("color");
+        String colorWhite = Color.fromString(rgbWhite).asHex();
+        System.out.println("White asHex " + colorWhite);
+        Assert.assertTrue(asHexBackground.contains("#f39814") && colorWhite.contains("#ffffff"));
 
     }
+
+
+
+
+
+
+
+
+
 
     @Test
     public void TC_091() {
@@ -55,15 +66,17 @@ public class US_17_Selectable_Test {
         selectable_page.tabsList.get(1).click();
         Driver.getDriver().switchTo().frame(1);
 
-        for (int i=0; i<=4; i++) {
+        for (int i = 0; i < 4; i++) {
             selectable_page.displaySelectList.get(i).click();
             Assert.assertTrue(selectable_page.displaySelectList.get(i).isEnabled());
         }
-        for (int i=6; i<=12; i++) {
+        ReusableMethods.waitFor(2);
+
+        for (int i = 5; i < 12; i++) {
             selectable_page.displaySelectList.get(i).click();
             ReusableMethods.waitFor(2);
             Assert.assertTrue(selectable_page.displaySelectList.get(i).isEnabled());
-            //ikinci for fail internet problemi olabilir
+
         }
 
     }
@@ -75,8 +88,8 @@ public class US_17_Selectable_Test {
         selectable_page.tabsList.get(1).click();
         Driver.getDriver().switchTo().frame(1);
         selectable_page.displaySelectList.get(0).click();
-        String rgbColor= selectable_page.displaySelectList.get(0).getCssValue("background-color");
-        String asHexBackground= Color.fromString(rgbColor).asHex();
+        String rgbColor = selectable_page.displaySelectList.get(0).getCssValue("background-color");
+        String asHexBackground = Color.fromString(rgbColor).asHex();
         System.out.println(asHexBackground);
         Assert.assertTrue(asHexBackground.contains("#f39814"));
 
@@ -88,7 +101,7 @@ public class US_17_Selectable_Test {
         ReusableMethods.waitFor(2);
         selectable_page.tabsList.get(2).click();
         Driver.getDriver().switchTo().frame(2);
-        for (WebElement w:selectable_page.itemList) {
+        for (WebElement w : selectable_page.itemList) {
             w.click();
             Assert.assertTrue(w.isEnabled());
         }
@@ -97,17 +110,23 @@ public class US_17_Selectable_Test {
     @Test
     public void TC_094() {
         //Kutu seçiminden önce ve sonra"You've selected: "yazısının karşısındaki değişimi assert ediniz
+        ReusableMethods.waitFor(3);
+        selectable_page.tabsList.get(2).click();
+        Driver.getDriver().switchTo().frame(2);
         ReusableMethods.waitFor(2);
-        selectable_page.tabsList.get(3).click();
-        Driver.getDriver().switchTo().frame(3);
-        ReusableMethods.waitFor(2);
-        String textBefore= selectable_page.serializeText.getText();
+        String textBefore = selectable_page.serializeText.getText();
         System.out.println(textBefore);
         selectable_page.itemList.get(0).click();
         ReusableMethods.waitFor(2);
-        String textAfter=selectable_page.serializeText.getText();
-        System.out.println(textAfter);
-        Assert.assertNotEquals(textBefore,textAfter);
+        for (WebElement w : selectable_page.itemList) {
+            w.click();
+            String textAfter = selectable_page.serializeText.getText();
+            System.out.println(textAfter);
+            Assert.assertNotEquals(textBefore, textAfter);
+        }
+        // String textAfter=selectable_page.serializeText.getText();
+//        System.out.println(textAfter);
+//        Assert.assertNotEquals(textBefore,textAfter);
 
     }
 }

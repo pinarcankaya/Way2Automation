@@ -2,6 +2,7 @@ package tests;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.Color;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
@@ -42,7 +43,19 @@ public class US_12_Tabs_Test {
 //        List<String> list = new ArrayList<>(windowsHandle);
 //        Driver.getDriver().switchTo().window(list.get(1));
 //        Driver.getDriver().switchTo().frame(0);
+//Tabs kutucuğunun üzerine geldiğinizde,kutucuğun renginin griye dönüştüğünü  doğrulayınız
 
+        String rgbColorBefor= us12TabsPage.tabsMenus.get(0).getCssValue("background-color");
+        String hexColor= Color.fromString(rgbColorBefor).asHex();
+        System.out.println("Before ashex "+hexColor);//Before ashex #000000
+        System.out.println("rgb Before "+rgbColorBefor);//rgb Before rgba(0, 0, 0, 0)
+        ReusableMethods.hover(us12TabsPage.tabsMenus.get(0));
+        String rgbColorAfter= us12TabsPage.tabsMenus.get(0).getCssValue("background-color");
+        String colorHexAfter= Color.fromString(rgbColorAfter).asHex();
+        System.out.println(colorHexAfter);//#333333
+        System.out.println(rgbColorAfter);//rgba(51, 51, 51, 1)
+        ReusableMethods.waitFor(2);
+        Assert.assertNotEquals(rgbColorBefor,rgbColorAfter);
     }
 
     @Test//Tab 1,Tab 2,Tab 3 Elementlerinin tıklanabiliyor ve Textbox'daki yazıların da görülebiliyor olduğunu assert ediniz.

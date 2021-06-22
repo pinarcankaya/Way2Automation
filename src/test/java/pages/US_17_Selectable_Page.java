@@ -22,6 +22,6 @@ public class US_17_Selectable_Page {
     public List<WebElement> itemList;
     @FindBy(xpath = "//li[contains(@class,'ui-state-default')]")
     public List<WebElement> displaySelectList;
-    @FindBy(xpath = "//span[contains(text(),'#')]")
+    @FindBy(xpath = "//span[@id='select-result']")
     public WebElement serializeText;
 }
