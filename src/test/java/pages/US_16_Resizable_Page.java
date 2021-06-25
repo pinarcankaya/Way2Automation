@@ -31,6 +31,6 @@ public class US_16_Resizable_Page {
 
 
     @FindBy(xpath = "//div[@class='ui-resizable-helper']")
-    public WebElement kesikCizgi;
+    public WebElement noktaliCizgi;
 
 }

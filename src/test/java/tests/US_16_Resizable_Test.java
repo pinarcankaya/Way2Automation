@@ -77,6 +77,7 @@ public class US_16_Resizable_Test {
         // Assert.assertEquals(resizablePage.resizable2.get(0).getAttribute("style"), "width: 350px; height: 250px;");
         Assert.assertTrue(resizablePage.allresizableBox.get(0).getAttribute("style").contains("width"));
 
+
     }
 
     //Resizable box'in sadece containment box sinirlari icinde acilabildigini assert ediniz
@@ -86,11 +87,14 @@ public class US_16_Resizable_Test {
         ReusableMethods.waitFor(1);
         resizablePage.allTabList.get(2).click();
         Driver.getDriver().switchTo().frame(2);
-        action.dragAndDropBy(resizablePage.resiableBoxOkIcon.get(0), 90, 70).build().perform();//258///238
+
+       // action.dragAndDropBy(resizablePage.resiableBoxOkIcon.get(0), 90, 74).build().perform();//258///238
+        action.clickAndHold(resizablePage.resiableBoxOkIcon.get(0)).moveByOffset(150,150).build().perform();
         Point p = resizablePage.allresizableBox.get(0).getLocation();
         System.out.println(p);
         Dimension d = resizablePage.allresizableBox.get(0).getSize();
         System.out.println(d.width + " " + d.height);
+        action.release().build().perform();
     }
 
     //Helper box'in buyutulup kucultulurken etrafindaki cizginin mavi renk oldugunu ve
@@ -101,13 +105,18 @@ public class US_16_Resizable_Test {
         ReusableMethods.waitFor(1);
         resizablePage.allTabList.get(3).click();
         Driver.getDriver().switchTo().frame(3);
+
         action.clickAndHold(resizablePage.resiableBoxOkIcon.get(0)).moveByOffset(100, 100).build().perform();
-        String cizgiRengi = resizablePage.kesikCizgi.getCssValue("border-right-color");
+
+        String cizgiRengi = resizablePage.noktaliCizgi.getCssValue("border-right-color");
         System.out.println(cizgiRengi);
-        String cizgiTuru = resizablePage.kesikCizgi.getCssValue("border-right-style");
+
+        String cizgiTuru = resizablePage.noktaliCizgi.getCssValue("border-right-style");
         System.out.println(cizgiTuru);
+
         Assert.assertEquals(cizgiRengi, "rgba(0, 0, 255, 1)");
         Assert.assertEquals(cizgiTuru, "dotted");
+
         action.release().build().perform();
 
 
@@ -122,24 +131,29 @@ public class US_16_Resizable_Test {
         resizablePage.allTabList.get(4).click();
         Driver.getDriver().switchTo().frame(4);
         ReusableMethods.waitFor(2);
-        String maxStyleBefore = resizablePage.allresizableBox.get(0).getAttribute("style");
-        System.out.println(maxStyleBefore);
-        action.clickAndHold(resizablePage.resiableBoxOkIcon.get(0)).moveByOffset(0, 0).build().perform();
-
-        String maxStyleAfter = resizablePage.allresizableBox.get(0).getAttribute("style");
-        System.out.println(maxStyleAfter);
-
-        System.out.println(resizablePage.resiableBoxOkIcon.get(0).getCssValue("height"));
-        System.out.println(resizablePage.resiableBoxOkIcon.get(0).getCssValue("width"));
 
 
-
-
-        String minStyleBefore = resizablePage.allresizableBox.get(0).getAttribute("style");
-        System.out.println(minStyleBefore);
         action.clickAndHold(resizablePage.resiableBoxOkIcon.get(0)).moveByOffset(200, 100).build().perform();
-        String minStyleAfter = resizablePage.allresizableBox.get(0).getAttribute("style");
-        System.out.println(minStyleAfter);
+        String maxStyle = resizablePage.allresizableBox.get(0).getAttribute("style");
+        System.out.println(maxStyle);
+
+        action.clickAndHold(resizablePage.resiableBoxOkIcon.get(0)).moveByOffset(-200, -100).build().perform();
+
+        String minStyle = resizablePage.allresizableBox.get(0).getAttribute("style");
+        System.out.println(minStyle);
+
+        Assert.assertEquals(minStyle,"width: 200px; height: 150px;");
+        Assert.assertEquals(maxStyle,"width: 350px; height: 250px;");
+
+
+
+
+
+
+
+
+
+
 
 
     }
