@@ -17,6 +17,9 @@ public class US_18_Sortable_Page {
     @FindBy(xpath = "//h2[.='Sortable']")
     public WebElement sortableMenu;
 
+    @FindBy(xpath = "(//a[.='ENTER TO THE TESTING WEBSITE'])[2]")
+    public WebElement enterGiris;
+
     @FindBy(xpath = "//li[@class='ui-state-default ui-sortable-handle']")
     public List<WebElement> defaultfonkList;
 
@@ -32,8 +35,8 @@ public class US_18_Sortable_Page {
     public List<WebElement> connectListSariItemList;
 
 
-    @FindBy(xpath = "//ul[@id='sortable']/li")
-    public List<WebElement> displayasGridItemList;
+//    @FindBy(xpath = "//ul[@id='sortable']/li")
+//    public List<WebElement> displayasGridItemList;
 
 
     @FindBy(xpath = "//a[.='Display as grid']")

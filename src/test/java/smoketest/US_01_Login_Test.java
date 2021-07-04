@@ -1,10 +1,6 @@
 package smoketest;
 
-
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.Test;
@@ -13,21 +9,14 @@ import utilities.ConfigReader;
 import utilities.Driver;
 import utilities.TestBase;
 
-
-
-
 public class US_01_Login_Test extends TestBase {
 
     US_01_Login_Page us01LoginPage=new US_01_Login_Page();
-
-
-
     @Test
     public void TC_001() {
         //1)musteri http://way2automation.com/way2auto_jquery/index.php web sayfasina girebiliyor olmali
         Assert.assertTrue(us01LoginPage.RegistrationFormText.isDisplayed());
     }
-
     @Test
     public void TC_002() {
 
@@ -69,11 +58,9 @@ public class US_01_Login_Test extends TestBase {
         Assert.assertTrue(us01LoginPage.loginErrorMesaj.isDisplayed());
 
     }
-
+    //dogru username,yanlis password  giris yapilmamali
     @Test
     public void TC_004() {
-
-        //dogru username,yanlis password  giris yapilmamali
         us01LoginPage.signinButton.click();
         us01LoginPage.usernameTextBox.sendKeys(ConfigReader.getProperty("valid_username"));
         us01LoginPage.passwordTextBox.sendKeys(ConfigReader.getProperty("invalid_password"));
@@ -94,7 +81,6 @@ public class US_01_Login_Test extends TestBase {
         //yanlis username,yanlis password giris yapilmamali
         us01LoginPage.signinButton.click();
         us01LoginPage.usernameTextBox.sendKeys(ConfigReader.getProperty("invalid_username"));
-
 //
 //    @Test
 //    public void TC_005() {
