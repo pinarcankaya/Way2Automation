@@ -1,17 +1,13 @@
 package tests;
 
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.Color;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
-
-import pages.Slider_Page;
-import pages.US_07_Accordion_Page;
-import pages.US_10_Menu_Page;
+import pages.US_11_Slider_Page;
 import utilities.ConfigReader;
 import utilities.Driver;
 import utilities.ReusableMethods;
@@ -21,11 +17,11 @@ import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
-public class Slider_Test {
+public class US_11_Slider_Test {
 
 
-    US_07_Accordion_Page accordionPage = new US_07_Accordion_Page();
-    Slider_Page sliderPage = new Slider_Page();
+
+    US_11_Slider_Page sliderPage = new US_11_Slider_Page();
     Actions action = new Actions(Driver.getDriver());
     WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 10);
 
@@ -34,7 +30,7 @@ public class Slider_Test {
         Driver.getDriver().get(ConfigReader.getProperty("way2Automation_url"));
         Driver.getDriver().manage().window().maximize();
         Driver.getDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        accordionPage.enterGiris.click();
+        sliderPage.enterGiris.click();
         ReusableMethods.waitFor(1);
         sliderPage.sliderLink.click();
         ReusableMethods.waitFor(1);
