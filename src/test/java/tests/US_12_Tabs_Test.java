@@ -2,8 +2,10 @@ package tests;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.Color;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import pages.US_12_Tabs_Page;
@@ -29,24 +31,29 @@ public class US_12_Tabs_Test {
         Driver.getDriver().manage().window().maximize();
         Driver.getDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         accordionPage.enterGiris.click();
-        ReusableMethods.waitFor(1);
-        us12TabsPage.tabsLink.click();
-        ReusableMethods.waitFor(1);
-
+        ReusableMethods.waitFor(2);
 
     }
 
     @Test//Tabs kutucuğunun üzerine geldiğinizde,kutucuğun renginin griye dönüştüğünü  doğrulayınız.
     public void TC01() {
-//        Set<String> windowsHandle = Driver.getDriver().getWindowHandles();
-//        List<String> list = new ArrayList<>(windowsHandle);
-//        Driver.getDriver().switchTo().window(list.get(1));
-//        Driver.getDriver().switchTo().frame(0);
 
+        String rgbColorBefor= us12TabsPage.tabsLink.getCssValue("background-color");
+        String hexColor= Color.fromString(rgbColorBefor).asHex();
+        System.out.println("Before ashex "+hexColor);//Before ashex #000000
+        System.out.println("rgb Before "+rgbColorBefor);//rgb Before rgba(0, 0, 0, 0)
+        ReusableMethods.hover(us12TabsPage.tabsLink);
+        String rgbColorAfter= us12TabsPage.tabsLink.getCssValue("background-color");
+        String colorHexAfter= Color.fromString(rgbColorAfter).asHex();
+        System.out.println(colorHexAfter);//#333333
+        System.out.println(rgbColorAfter);//rgba(51, 51, 51, 1)
+        ReusableMethods.waitFor(2);
+        Assert.assertNotEquals(rgbColorBefor,rgbColorAfter);
     }
 
     @Test//Tab 1,Tab 2,Tab 3 Elementlerinin tıklanabiliyor ve Textbox'daki yazıların da görülebiliyor olduğunu assert ediniz.
     public void TC02() {
+        us12TabsPage.tabsLink.click();
         Set<String> windowsHandle = Driver.getDriver().getWindowHandles();
         List<String> list = new ArrayList<>(windowsHandle);
         Driver.getDriver().switchTo().window(list.get(1));
@@ -66,6 +73,7 @@ public class US_12_Tabs_Test {
     @Test//Tab 1,Tab 2,Tab 3  kutucuklarından herhangi birine tıklanıldığında ,
     // Backround renginin griden beyaza dönüştüğünü assert ediniz.
     public void TC03() {
+        us12TabsPage.tabsLink.click();
         Set<String> windowsHandle = Driver.getDriver().getWindowHandles();
         List<String> list = new ArrayList<>(windowsHandle);
         Driver.getDriver().switchTo().window(list.get(1));
@@ -88,6 +96,7 @@ public class US_12_Tabs_Test {
 
     @Test//Tab 1 icindeki yazılar "Proin" ile başlayıp,"lectus."  ile bittiğini tespit edip doğrulayınız.
     public void TC04() {
+        us12TabsPage.tabsLink.click();
         Set<String> windowsHandle = Driver.getDriver().getWindowHandles();
         List<String> list = new ArrayList<>(windowsHandle);
         Driver.getDriver().switchTo().window(list.get(1));
@@ -99,6 +108,7 @@ public class US_12_Tabs_Test {
 
     @Test//Tab 2 icindeki paragrafta "Aenean vel metus." cumlesi varmi assert ediniz.
     public void TC05() {
+        us12TabsPage.tabsLink.click();
         Set<String> windowsHandle = Driver.getDriver().getWindowHandles();
         List<String> list = new ArrayList<>(windowsHandle);
         Driver.getDriver().switchTo().window(list.get(1));
@@ -109,6 +119,7 @@ public class US_12_Tabs_Test {
 
     @Test//Tab 2 "Mauris eleifend est et turpis." cumlesi ilemi basliyor dogrulayiniz.
     public void TC06() {
+        us12TabsPage.tabsLink.click();
         Set<String> windowsHandle = Driver.getDriver().getWindowHandles();
         List<String> list = new ArrayList<>(windowsHandle);
         Driver.getDriver().switchTo().window(list.get(1));
@@ -117,4 +128,8 @@ public class US_12_Tabs_Test {
         Assert.assertTrue(us12TabsPage.alltext().get(2).getText().startsWith("Mauris eleifend est et turpis."));
     }
 
+//    @AfterMethod
+//    public void close() {
+//        Driver.getDriver().quit();
+//    }
 }
