@@ -1,4 +1,5 @@
 package tests;
+
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -8,6 +9,7 @@ import pages.US_02_Alert_Page;
 import utilities.ConfigReader;
 import utilities.Driver;
 import utilities.ReusableMethods;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -57,14 +59,14 @@ public class US_02_Alert_Test {
     @Test
     public void TC_005() {
         //Texbox'a tikladiginizda Alert mesaj kutusunun aciliyor oldugunu dogrulayiniz
-      ReusableMethods.waitFor(2);
-    //    Driver.getDriver().switchTo().frame(0);
+        ReusableMethods.waitFor(2);
+        //    Driver.getDriver().switchTo().frame(0);
         alertPage.simpleAlert.click();
         ReusableMethods.waitFor(2);
         String alertText = Driver.getDriver().switchTo().alert().getText();
         System.out.println(alertText);
         Driver.getDriver().switchTo().alert().accept();
-         Assert.assertEquals(alertText,("I am an alert box!"));
+        Assert.assertEquals(alertText, ("I am an alert box!"));
 
     }
 
@@ -72,31 +74,31 @@ public class US_02_Alert_Test {
     public void TC_006() {
         //ok butonuna tiklanabildigini assert ediniz
         ReusableMethods.waitFor(2);
-      //  Driver.getDriver().switchTo().frame(0);
+        //  Driver.getDriver().switchTo().frame(0);
         alertPage.simpleAlert.click();
         ReusableMethods.waitFor(2);
         Driver.getDriver().switchTo().alert().accept();
         Assert.assertTrue(alertPage.simpleAlert.isEnabled());
     }
 
-//    @Test
-//    public void TC_07() {
-//        //Input alert butonuna tiklanabildigini dogrulayiniz
+    @Test
+    public void TC_07() {
+        //Input alert butonuna tiklanabildigini dogrulayiniz
 //        ReusableMethods.waitFor(2);
 //        Driver.getDriver().switchTo().frame(1);
 //        ReusableMethods.waitFor(2);
-////        String rgbBefor= alertPage.inputMenu.getCssValue("background-color");
-////        String asHexBefor= Color.fromString(rgbBefor).asHex();
-////        System.out.println(asHexBefor);
+//        String rgbBefor= alertPage.inputMenu.getCssValue("background-color");
+//        String asHexBefor= Color.fromString(rgbBefor).asHex();
+//        System.out.println(asHexBefor);
 //        alertPage.inputMenu.click();
 //          Assert.assertTrue(alertPage.inputMenu.isEnabled());
-//      //  wait.until(ExpectedConditions.visibilityOf(alertPage.inputMenu));
-////        String rgbAfter= alertPage.inputMenu.getCssValue("background-color");
-////        String asHexAfter= Color.fromString(rgbBefor).asHex();
-////        System.out.println(asHexAfter);
-//
-//        //maybe have a bug, i am try it tomorrow
-//    }
+        //  wait.until(ExpectedConditions.visibilityOf(alertPage.inputMenu));
+//        String rgbAfter= alertPage.inputMenu.getCssValue("background-color");
+//        String asHexAfter= Color.fromString(rgbBefor).asHex();
+//        System.out.println(asHexAfter);
+
+        //maybe have a bug, i am try it tomorrow
+    }
 
     @AfterClass
     public void tearDown() {
