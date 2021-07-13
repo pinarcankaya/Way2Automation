@@ -16,6 +16,7 @@ public class US_01_Login_Page {
     public WebElement RegistrationFormText;
     @FindBy(xpath = "//h1[@class='heading']")
     public WebElement scriptsPlace;
+
 }
 
 
