@@ -1,6 +1,5 @@
 package tests;
 
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.Color;
@@ -50,8 +49,6 @@ public class US_12_Tabs_Test {
         System.out.println(rgbColorAfter);//rgba(51, 51, 51, 1)
         ReusableMethods.waitFor(2);
         Assert.assertNotEquals(rgbColorBefor,rgbColorAfter);
-        JavascriptExecutor javascrp=( (JavascriptExecutor)Driver.getDriver());
-
     }
 
     @Test//Tab 1,Tab 2,Tab 3 Elementlerinin tıklanabiliyor ve Textbox'daki yazıların da görülebiliyor olduğunu assert ediniz.
