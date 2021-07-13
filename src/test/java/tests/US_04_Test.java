@@ -19,11 +19,11 @@ public class US_04_Test extends TestBase {
 
     @BeforeMethod
     public void login_test() {
-        us01LoginPage.signinButton.click();
-        us01LoginPage.usernameTextBox.sendKeys(ConfigReader.getProperty("valid_username"));
-        us01LoginPage.passwordTextBox.sendKeys(ConfigReader.getProperty("valid_password"));
+//        us01LoginPage.signinButton.click();
+//        us01LoginPage.usernameTextBox.sendKeys(ConfigReader.getProperty("valid_username"));
+//        us01LoginPage.passwordTextBox.sendKeys(ConfigReader.getProperty("valid_password"));
 
-        us01LoginPage.submitButton.click();
+//        us01LoginPage.submitButton.click();
     }
 
     @Test
