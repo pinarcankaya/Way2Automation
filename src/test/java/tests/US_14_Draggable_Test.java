@@ -28,7 +28,7 @@ public class US_14_Draggable_Test {
     Set<String> windowsHandles ;
     List<String> list;
 
-    @BeforeMethod
+    @BeforeClass
     public void setup() {
         Driver.getDriver().get(ConfigReader.getProperty("way2Automation_url"));
         Driver.getDriver().manage().window().maximize();
@@ -146,6 +146,6 @@ public class US_14_Draggable_Test {
 
     @AfterMethod
     public void tearDownMethod() {
-        Driver.getDriver().switchTo().window(list.get(0));
+        Driver.getDriver().switchTo().defaultContent();
     }
 }

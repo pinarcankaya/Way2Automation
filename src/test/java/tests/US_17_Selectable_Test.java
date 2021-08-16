@@ -4,6 +4,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.Color;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import pages.US_07_Accordion_Page;
@@ -23,7 +24,7 @@ public class US_17_Selectable_Test {
     Set<String> windowHandles;
     List<String> list;
 
-    @BeforeMethod
+    @BeforeClass
     public void setUP() {
         Driver.getDriver().get(ConfigReader.getProperty("way2Automation_url"));
         Driver.getDriver().manage().window().maximize();
@@ -104,28 +105,29 @@ public class US_17_Selectable_Test {
     @Test
     public void TC_094() {
         //Kutu seçiminden önce ve sonra"You've selected: "yazısının karşısındaki değişimi assert ediniz
-        ReusableMethods.waitFor(3);
+        ReusableMethods.waitFor(2);
         selectable_page.tabsList.get(2).click();
         Driver.getDriver().switchTo().frame(2);
         ReusableMethods.waitFor(2);
         String textBefore = selectable_page.serializeText.getText();
         System.out.println(textBefore);
-        selectable_page.itemList.get(0).click();
         ReusableMethods.waitFor(2);
-        for (WebElement w : selectable_page.itemList) {
-            w.click();
-            ReusableMethods.waitFor(2);
+        for (int i = 8; i <selectable_page.itemList.size() ; i++) {
+            selectable_page.itemList.get(i).click();
+
+            ReusableMethods.waitFor(1);
             String textAfter = selectable_page.serializeText.getText();
             System.out.println(textAfter);
+            ReusableMethods.waitFor(2);
             Assert.assertNotEquals(textBefore,textAfter);
         }
-        // String textAfter=selectable_page.serializeText.getText();
+//         String textAfter=selectable_page.serializeText.getText();
 //        System.out.println(textAfter);
 //        Assert.assertNotEquals(textBefore,textAfter);
 
     }
     @AfterMethod
     public void tearDownMethod() {
-        Driver.getDriver().switchTo().window(list.get(0));
+        Driver.getDriver().switchTo().defaultContent();
     }
 }

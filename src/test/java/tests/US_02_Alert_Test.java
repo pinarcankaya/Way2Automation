@@ -1,6 +1,9 @@
 package tests;
+import org.openqa.selenium.support.Color;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import pages.US_01_Login_Page;
@@ -17,6 +20,8 @@ public class US_02_Alert_Test {
 
     US_02_Alert_Page alertPage = new US_02_Alert_Page();
     US_01_Login_Page us01LoginPage = new US_01_Login_Page();
+    Set<String> windowHandles;
+    List<String> list;
 
     @BeforeClass
     public void setUp() {
@@ -29,8 +34,8 @@ public class US_02_Alert_Test {
         ReusableMethods.waitFor(2);
         alertPage.alertMenu.click();
         ReusableMethods.waitFor(2);
-        Set<String> windowsHandle = Driver.getDriver().getWindowHandles();
-        List<String> list = new ArrayList<>(windowsHandle);
+        windowHandles = Driver.getDriver().getWindowHandles();
+        list = new ArrayList<>(windowHandles);
         Driver.getDriver().switchTo().window(list.get(1));
 
 
@@ -79,27 +84,27 @@ public class US_02_Alert_Test {
         Assert.assertTrue(alertPage.simpleAlert.isEnabled());
     }
 
-//    @Test
-//    public void TC_07() {
-//        //Input alert butonuna tiklanabildigini dogrulayiniz
-//        ReusableMethods.waitFor(2);
-//        Driver.getDriver().switchTo().frame(1);
-//        ReusableMethods.waitFor(2);
-////        String rgbBefor= alertPage.inputMenu.getCssValue("background-color");
-////        String asHexBefor= Color.fromString(rgbBefor).asHex();
-////        System.out.println(asHexBefor);
-//        alertPage.inputMenu.click();
-//          Assert.assertTrue(alertPage.inputMenu.isEnabled());
-//      //  wait.until(ExpectedConditions.visibilityOf(alertPage.inputMenu));
-////        String rgbAfter= alertPage.inputMenu.getCssValue("background-color");
-////        String asHexAfter= Color.fromString(rgbBefor).asHex();
-////        System.out.println(asHexAfter);
-//
-//        //maybe have a bug, i am try it tomorrow
-//    }
+    @Test
+    public void TC_07() {
+        //Input alert butonuna tiklanabildigini dogrulayiniz
+        ReusableMethods.waitFor(2);
+        Driver.getDriver().switchTo().frame(1);
+        ReusableMethods.waitFor(2);
+        String rgbBefor= alertPage.inputMenu.getCssValue("background-color");
+        String asHexBefor= Color.fromString(rgbBefor).asHex();
+        System.out.println(asHexBefor);
+        alertPage.inputMenu.click();
+          Assert.assertTrue(alertPage.inputMenu.isEnabled());
+//        wait.until(ExpectedConditions.visibilityOf(alertPage.inputMenu));
+        String rgbAfter= alertPage.inputMenu.getCssValue("background-color");
+        String asHexAfter= Color.fromString(rgbBefor).asHex();
+        System.out.println(asHexAfter);
 
-    @AfterClass
-    public void tearDown() {
-        Driver.closeDriver();
+        //maybe have a bug, i am try it tomorrow
+    }
+
+    @AfterMethod
+    public void tearDownMethod() {
+        Driver.getDriver().switchTo().parentFrame();
     }
 }

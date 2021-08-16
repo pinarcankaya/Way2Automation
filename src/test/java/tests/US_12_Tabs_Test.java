@@ -79,21 +79,31 @@ public class US_12_Tabs_Test {
         windowsHandles = Driver.getDriver().getWindowHandles();
         list = new ArrayList<>(windowsHandles);
         Driver.getDriver().switchTo().window(list.get(1));
-
         Driver.getDriver().switchTo().frame(0);
+        // ReusableMethods.waitFor(3);
+        String colorbefore=us12TabsPage.tabsMenus.get(1).getCssValue("background-color");
+        ReusableMethods.waitForClickablility(us12TabsPage.tabsMenus.get(0),5);
+        us12TabsPage.tabsMenus.get(1).click();
+        String colorafter=us12TabsPage.tabsMenus.get(1).getCssValue("background-color");
 
-        for (WebElement w:us12TabsPage.tabsMenus){
-            String colorbefore=w.getCssValue("background-color");
-            System.out.println("color before = "+colorbefore);
-            w.click();
-            ReusableMethods.waitFor(2);
-            String colorafter=w.getCssValue("background-color");
-            System.out.println("color after = "+colorafter);
-            ReusableMethods.waitFor(2);
-            Assert.assertEquals(colorbefore,colorafter);
+        System.out.println("color before = "+colorbefore);
+        System.out.println("color after = "+colorafter);
+        Assert.assertNotEquals(colorbefore,colorafter);
 
-           // Assert.assertEquals(colorafter,"rgba(255, 255, 255, 1)");
-        }
+//
+//        for (WebElement w:us12TabsPage.tabsMenus){
+//            String colorbefore=w.getCssValue("background-color");
+//            System.out.println("color before = "+colorbefore);
+//            ReusableMethods.waitForClickablility(w,5);
+//            w.click();
+//            String colorafter=w.getCssValue("background-color");
+//            ReusableMethods.waitFor(2);
+//            System.out.println("color after = "+colorafter);
+//            Assert.assertEquals(colorbefore,colorafter);
+//
+//
+//           // Assert.assertEquals(colorafter,"rgba(255, 255, 255, 1)");
+//        }
     }
 
     @Test//Tab 1 icindeki yazılar "Proin" ile başlayıp,"lectus."  ile bittiğini tespit edip doğrulayınız.
@@ -132,6 +142,7 @@ public class US_12_Tabs_Test {
 
     @AfterMethod
     public void tearDownMethod() {
-        Driver.getDriver().switchTo().parentFrame();
+        Driver.getDriver().switchTo().defaultContent();
+       // Driver.getDriver().switchTo().parentFrame();
     }
 }
