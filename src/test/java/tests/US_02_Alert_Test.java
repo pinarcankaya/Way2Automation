@@ -1,95 +1,105 @@
 package tests;
-
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.StaleElementReferenceException;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import pages.US_01_Login_Page;
 import pages.US_02_Alert_Page;
 import utilities.ConfigReader;
 import utilities.Driver;
 import utilities.ReusableMethods;
-import utilities.TestBase;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
-public class US_02_Alert_Test extends TestBase {
+public class US_02_Alert_Test {
 
-    US_02_Alert_Page us02AlertPage = new US_02_Alert_Page();
+    US_02_Alert_Page alertPage = new US_02_Alert_Page();
     US_01_Login_Page us01LoginPage = new US_01_Login_Page();
 
-    @BeforeMethod
-    public void anasayfa() {
-     //   us02AlertPage.enterGiris.click();
-      //  us01LoginPage.signinButton.click();
-       // us01LoginPage.usernameTextBox.sendKeys(ConfigReader.getProperty("valid_username"));
-      //  us01LoginPage.passwordTextBox.sendKeys(ConfigReader.getProperty("valid_password"));
-      //  us01LoginPage.submitButton.click();
+    @BeforeClass
+    public void setUp() {
+
+        Driver.getDriver().get(ConfigReader.getProperty("way2Automation_url"));
+        Driver.getDriver().manage().window().maximize();
+        Driver.getDriver().manage().timeouts().implicitlyWait(10, TimeUnit.MINUTES);
+        ReusableMethods.waitFor(2);
+        us01LoginPage.enterGiris.click();
+        ReusableMethods.waitFor(2);
+        alertPage.alertMenu.click();
+        ReusableMethods.waitFor(2);
+        Set<String> windowsHandle = Driver.getDriver().getWindowHandles();
+        List<String> list = new ArrayList<>(windowsHandle);
+        Driver.getDriver().switchTo().window(list.get(1));
+
+
+    }
+
+    @Test
+    public void TC_003() {
+        //Simple Alert butonuna tiklanabildigini assert ediniz
+        System.out.println(alertPage.alertHeader.getText());
+        Assert.assertTrue(alertPage.alertHeader.isDisplayed());
     }
 
     @Test
     public void TC_004() {
-        //Simple Alert butonuna tiklanabildigini assert ediniz
+        //"Click to button to display an alert box" yazisini iceren textbox'in tiklanabildigini assert ediniz
+        Driver.getDriver().switchTo().frame(0);
+        alertPage.simpleAlert.click();
+        ReusableMethods.waitFor(2);
+        Driver.getDriver().switchTo().alert().accept();
+        Assert.assertTrue(alertPage.simpleAlert.isEnabled());
 
-        wait.until(ExpectedConditions.visibilityOf(us02AlertPage.alertMenu));
-        ReusableMethods.clickStaleElement(us02AlertPage.alertMenu);
-        Assert.assertTrue(us02AlertPage.simpleAlertBaslik.isEnabled()); //simple alert
-        // Assert.assertTrue(us02AlertPage.alertMenu.isEnabled()); //anasayfadaki alert menu
     }
 
     @Test
     public void TC_005() {
-        //"Click to button to display an alert box" yazisini iceren textbox'in tiklanabildigini assert ediniz
-
-        // wait.until(ExpectedConditions.visibilityOf(us02AlertPage.alertMenu));
-        ReusableMethods.clickStaleElement(us02AlertPage.alertMenu);
-        Driver.getDriver().switchTo().frame(us02AlertPage.frame);
-        wait.until(ExpectedConditions.elementToBeClickable(us02AlertPage.simpleAlertButton));
-        Assert.assertTrue(us02AlertPage.simpleAlertButton.isEnabled());
+        //Texbox'a tikladiginizda Alert mesaj kutusunun aciliyor oldugunu dogrulayiniz
+      ReusableMethods.waitFor(2);
+    //    Driver.getDriver().switchTo().frame(0);
+        alertPage.simpleAlert.click();
+        ReusableMethods.waitFor(2);
+        String alertText = Driver.getDriver().switchTo().alert().getText();
+        System.out.println(alertText);
+        Driver.getDriver().switchTo().alert().accept();
+         Assert.assertEquals(alertText,("I am an alert box!"));
 
     }
 
     @Test
     public void TC_006() {
-        //Texbox'a tikladiginizda Alert mesaj kutusunun aciliyor oldugunu dogrulayiniz
-        ReusableMethods.clickStaleElement(us02AlertPage.alertMenu);
-
-//        boolean cevir = true;
-//        int i = 0;
-//        while (cevir) {
-//            try {
-//                wait.until(ExpectedConditions.elementToBeClickable(us02AlertPage.alertMenu));
-//                us02AlertPage.alertMenu.click();
-//                cevir = false;
-//            } catch (StaleElementReferenceException e) {
-//                cevir = true;
-//            }
-//            i++;
-//        }
-        // System.out.println(i);
-
-
-        // wait.until(ExpectedConditions.visibilityOf(us02AlertPage.simpleAlertBaslik));
-//        us02AlertPage.simpleAlertBaslik.click();
-        // wait.until(ExpectedConditions.elementToBeClickable(us02AlertPage.simpleAlertButton));
-        Driver.getDriver().switchTo().frame(us02AlertPage.frame);
-        actions.click(us02AlertPage.simpleAlertButton).perform();
-
-
-        wait.until(ExpectedConditions.alertIsPresent());
-        Driver.getDriver().switchTo().alert(); //alerte gecis
-        String alertText = Driver.getDriver().switchTo().alert().getText();
-        // Assert.assertEquals(alertText.equals("I am an alert box!")); //dogrula
-
+        //ok butonuna tiklanabildigini assert ediniz
+        ReusableMethods.waitFor(2);
+      //  Driver.getDriver().switchTo().frame(0);
+        alertPage.simpleAlert.click();
+        ReusableMethods.waitFor(2);
+        Driver.getDriver().switchTo().alert().accept();
+        Assert.assertTrue(alertPage.simpleAlert.isEnabled());
     }
+
+//    @Test
+//    public void TC_07() {
+//        //Input alert butonuna tiklanabildigini dogrulayiniz
+//        ReusableMethods.waitFor(2);
+//        Driver.getDriver().switchTo().frame(1);
+//        ReusableMethods.waitFor(2);
+////        String rgbBefor= alertPage.inputMenu.getCssValue("background-color");
+////        String asHexBefor= Color.fromString(rgbBefor).asHex();
+////        System.out.println(asHexBefor);
+//        alertPage.inputMenu.click();
+//          Assert.assertTrue(alertPage.inputMenu.isEnabled());
+//      //  wait.until(ExpectedConditions.visibilityOf(alertPage.inputMenu));
+////        String rgbAfter= alertPage.inputMenu.getCssValue("background-color");
+////        String asHexAfter= Color.fromString(rgbBefor).asHex();
+////        System.out.println(asHexAfter);
+//
+//        //maybe have a bug, i am try it tomorrow
+//    }
 
     @AfterClass
     public void tearDown() {
-//        Driver.closeDriver();
+        Driver.closeDriver();
     }
 }

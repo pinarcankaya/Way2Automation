@@ -1,10 +1,8 @@
 package tests;
 
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.Color;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -19,14 +17,14 @@ public class US_04_Test extends TestBase {
     US_01_Login_Page us01LoginPage = new US_01_Login_Page();
     US_04_Page us04Page = new US_04_Page();
 
-    @BeforeMethod
-    public void login_test() {
-        us01LoginPage.signinButton.click();
-        us01LoginPage.usernameTextBox.sendKeys(ConfigReader.getProperty("valid_username"));
-        us01LoginPage.passwordTextBox.sendKeys(ConfigReader.getProperty("valid_password"));
-
-        us01LoginPage.submitButton.click();
-    }
+//    @BeforeMethod
+//    public void login_test() {
+//        us01LoginPage.signinButton.click();
+//        us01LoginPage.usernameTextBox.sendKeys(ConfigReader.getProperty("valid_username"));
+//        us01LoginPage.passwordTextBox.sendKeys(ConfigReader.getProperty("valid_password"));
+//
+//        us01LoginPage.submitButton.click();
+//    }
 
     @Test
     public void TC_024t() {

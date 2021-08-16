@@ -63,6 +63,8 @@ public class US_14_Draggable_Test {
 
         //dikey hareket
         action.dragAndDropBy(draggablePage.constrainMovementDrabBoxs.get(0), 50, 50).build().perform();
+
+
         String verticalyBox = draggablePage.constrainMovementDrabBoxs.get(0).getAttribute("style");
         System.out.println(verticalyBox);
 
