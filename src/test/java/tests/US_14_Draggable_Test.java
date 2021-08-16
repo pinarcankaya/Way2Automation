@@ -7,10 +7,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 import pages.US_07_Accordion_Page;
 import pages.US_14_Draggable_Page;
 import utilities.ConfigReader;
@@ -28,6 +25,8 @@ public class US_14_Draggable_Test {
     US_14_Draggable_Page draggablePage = new US_14_Draggable_Page();
     Actions action = new Actions(Driver.getDriver());
     WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 10);
+    Set<String> windowsHandles ;
+    List<String> list;
 
     @BeforeMethod
     public void setup() {
@@ -38,8 +37,8 @@ public class US_14_Draggable_Test {
         ReusableMethods.waitFor(1);
         draggablePage.draggableMenuLink.click();
         ReusableMethods.waitFor(1);
-        Set<String> windowsHandle = Driver.getDriver().getWindowHandles();
-        List<String> list = new ArrayList<>(windowsHandle);
+        windowsHandles = Driver.getDriver().getWindowHandles();
+        list = new ArrayList<>(windowsHandles);
         Driver.getDriver().switchTo().window(list.get(1));
     }
 
@@ -148,8 +147,8 @@ public class US_14_Draggable_Test {
         Driver.getDriver().switchTo().parentFrame();
     }
 
-    @AfterClass
-    public void quit() {
-        Driver.closeDriver();
+    @AfterMethod
+    public void tearDownMethod() {
+        Driver.getDriver().switchTo().window(list.get(0));
     }
 }

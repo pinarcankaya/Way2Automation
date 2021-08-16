@@ -37,7 +37,7 @@ public class US_07_Accordion_Page {
     @FindBy(xpath = "//p[contains(text(),'Sed non urna')]")
     public WebElement selection2Text;
 
-    @FindBy(xpath = "//p[contains(text(),'Mauris mauris ante')]")
+    @FindBy(xpath = "//*[@id='ui-id-2']/p")
     public WebElement selection1Text;
 
 

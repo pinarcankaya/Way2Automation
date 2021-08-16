@@ -17,7 +17,7 @@ public class US_09_DatePicker_Page {
     public WebElement datapickerMenu;
 
 
-    @FindBy(xpath = "//input[@id='datepicker']")
+    @FindBy(xpath = "//*[@id='datepicker']")
     public List<WebElement> dataInputList;
 
 
@@ -40,6 +40,8 @@ public class US_09_DatePicker_Page {
     @FindBy(xpath = "//a[.='Display month & year']")
     public WebElement displayMonthYearMenu;
 
+    @FindBy(xpath = "//a[.='Default functionality']")
+    public WebElement defauldMenu;
 
     @FindBy(xpath = "//select[@class='ui-datepicker-month']")
     public WebElement monthDropDown;

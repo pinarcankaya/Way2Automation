@@ -4,7 +4,6 @@ import org.openqa.selenium.Point;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.Color;
-import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -14,19 +13,19 @@ import pages.US_15_Droppable_Page;
 import utilities.ConfigReader;
 import utilities.Driver;
 import utilities.ReusableMethods;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 
-public class US_15_Droppable_Test {
+public class  US_15_Droppable_Test {
 
 
     US_15_Droppable_Page droppablePage=new US_15_Droppable_Page();
     US_07_Accordion_Page accordionPage= new US_07_Accordion_Page();
     Actions action = new Actions(Driver.getDriver());
+    Set<String> windowHandles;
+    List<String> list;
+
+
     @BeforeMethod
     public void setUp(){
         Driver.getDriver().get(ConfigReader.getProperty("way2Automation_url"));
@@ -35,10 +34,10 @@ public class US_15_Droppable_Test {
 
 
         accordionPage.enterGiris.click();
-        ReusableMethods.waitFor(2);
+        ReusableMethods.waitFor(3);
         droppablePage.droppableMenu.click();
-        Set<String> windowHandles= Driver.getDriver().getWindowHandles();
-        List<String> list= new ArrayList<>(windowHandles);
+       windowHandles= Driver.getDriver().getWindowHandles();
+        list= new ArrayList<>(windowHandles);
         Driver.getDriver().switchTo().window(list.get(1));
         ReusableMethods.waitFor(2);
     }
@@ -47,14 +46,22 @@ public class US_15_Droppable_Test {
     public void TC_79(){
         Driver.getDriver().switchTo().frame(0);
 
+        Point smallBoxIlkKonum=droppablePage.draggableSmallBoxList.get(0).getLocation();//Mevcut konumunu verir.
+        action.dragAndDropBy(droppablePage.draggableSmallBoxList.get(0),150,10).build().perform();
+        ReusableMethods.waitFor(2);
+        Point smallBoxSonKonum=droppablePage.draggableSmallBoxList.get(0).getLocation();
+
+        Assert.assertNotEquals(smallBoxIlkKonum,smallBoxSonKonum);
+
         Point bigBoxIlkKonum=droppablePage.droppableBigBoxList.get(0).getLocation();//Mevcut konumunu verir.
         action.dragAndDropBy(droppablePage.droppableBigBoxList.get(0),150,10).build().perform();
         ReusableMethods.waitFor(2);
         Point bigBoxSonKonum=droppablePage.droppableBigBoxList.get(0).getLocation();
-        System.out.println(bigBoxIlkKonum+"\n"+bigBoxSonKonum);
 
         Assert.assertEquals(bigBoxIlkKonum,bigBoxIlkKonum);
 
+        System.out.println(smallBoxIlkKonum+"\n"+smallBoxSonKonum);
+        System.out.println(bigBoxIlkKonum+"\n"+bigBoxSonKonum);
 
     }
 
@@ -69,9 +76,8 @@ public class US_15_Droppable_Test {
         Point smallBoxKonum1=droppablePage.draggableSmallBoxList.get(0).getLocation();
         Point smallBoxKonum2=droppablePage.draggableSmallBoxList.get(1).getLocation();
 
-        System.out.println(smallBoxKonum1+"  "+smallBoxKonum2);
         Assert.assertEquals(smallBoxKonum1,smallBoxKonum2);
-
+        System.out.println(smallBoxKonum1+"  "+smallBoxKonum2);
     }
 
     @Test  //Prevent Propagation'da Drag me to my target box'in, buyuk kutulardan herhangi birine birakildiginda
@@ -85,19 +91,18 @@ public class US_15_Droppable_Test {
         ReusableMethods.waitFor(1);
         String ilkYazi  = droppablePage.droppableBigBoxList.get(0).getText();
 
-        System.out.println("ilk Renk  : "+hexIlk+"\n"+"ilkYazi : "+ilkYazi);
-
         action.dragAndDrop(droppablePage.draggableSmallBoxList.get(0),droppablePage.droppableBigBoxList.get(0)).build().perform();
 
-        String sonRenk = droppablePage.droppableBigBoxList.get(0).getCssValue("background-color");// Renk zaten Hexcolor olarak geliyor,cevirmeye gerek yok.
+        String sonRenk = droppablePage.droppableBigBoxList.get(0).getCssValue("background-color");
+        String hexSon=Color.fromString(sonRenk).asHex();
         String sonYazi  = droppablePage.droppableBigBoxList.get(0).getText();
 
+        Assert.assertNotEquals(ilkYazi,sonYazi);
+        Assert.assertNotEquals(hexIlk,hexSon);
+        Assert.assertEquals(hexSon,"#fbf9ee");
+
+            System.out.println("ilk Renk  : "+hexIlk+"\n"+"ilkYazi : "+ilkYazi);
             System.out.println("SonRenk : "+sonRenk+"\n" + "SonYazi : "+sonYazi);
-
-            Assert.assertNotEquals(ilkYazi,sonYazi);
-            Assert.assertEquals(sonRenk,"#fbf9ee");
-
-
     }
 
       @Test  //Revert draggable Position'da "I revert when I'm dropped" kutusunun hedefe koyuldugunda geri dondugunu
@@ -110,12 +115,14 @@ public class US_15_Droppable_Test {
         action.dragAndDrop(droppablePage.draggableSmallBoxList.get(0),droppablePage.droppableBigBoxList.get(0)).build().perform();
         ReusableMethods.waitFor(2);
         Point IamNotDroppedSonKonum=droppablePage.draggableSmallBoxList.get(0).getLocation();
+
         Assert.assertEquals(IamNotDroppedIlkKonum,IamNotDroppedSonKonum);
 
         Point IamDroppedIlkKonum=droppablePage.draggableSmallBoxList.get(1).getLocation();
         action.dragAndDrop(droppablePage.draggableSmallBoxList.get(1),droppablePage.droppableBigBoxList.get(0)).build().perform();
         ReusableMethods.waitFor(2);
         Point IamDroppedSonKonum =droppablePage.draggableSmallBoxList.get(1).getLocation();
+
         Assert.assertNotEquals(IamDroppedIlkKonum,IamDroppedSonKonum);
 
     }
@@ -134,7 +141,7 @@ public class US_15_Droppable_Test {
 
     @AfterMethod
     public void tearDownMethod() {
-        Driver.closeDriver();
+        Driver.getDriver().switchTo().window(list.get(0));
     }
 
 

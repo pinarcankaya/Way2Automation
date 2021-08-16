@@ -33,7 +33,8 @@ public class US_13_ToolTip_Page {
     @FindBy(xpath = "//body/p/a")
     public List<WebElement> allActionLinks;
 
-
+    @FindBy(xpath = "//iframe")
+    public List<WebElement> frame;
 
 
 }
