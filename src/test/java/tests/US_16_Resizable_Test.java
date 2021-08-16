@@ -6,6 +6,7 @@ import org.openqa.selenium.Point;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import pages.US_07_Accordion_Page;
@@ -25,6 +26,9 @@ public class US_16_Resizable_Test {
     US_16_Resizable_Page resizablePage = new US_16_Resizable_Page();
     Actions action = new Actions(Driver.getDriver());
     WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 10);
+    Set<String> windowHandles;
+    List<String> list;
+
 
     @BeforeMethod
     public void setup() {
@@ -35,8 +39,8 @@ public class US_16_Resizable_Test {
         ReusableMethods.waitFor(1);
         resizablePage.resizableMenu.click();
         ReusableMethods.waitFor(1);
-        Set<String> windowsHandle = Driver.getDriver().getWindowHandles();
-        List<String> list = new ArrayList<>(windowsHandle);
+        windowHandles = Driver.getDriver().getWindowHandles();
+        list = new ArrayList<>(windowHandles);
         Driver.getDriver().switchTo().window(list.get(1));
     }
 
@@ -144,17 +148,10 @@ public class US_16_Resizable_Test {
 
         Assert.assertEquals(minStyle,"width: 200px; height: 150px;");
         Assert.assertEquals(maxStyle,"width: 350px; height: 250px;");
+    }
 
-
-
-
-
-
-
-
-
-
-
-
+    @AfterMethod
+    public void tearDownMethod() {
+        Driver.getDriver().switchTo().window(list.get(0));
     }
 }
