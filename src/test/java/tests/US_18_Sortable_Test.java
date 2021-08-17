@@ -91,10 +91,10 @@ public class US_18_Sortable_Test {
 
         ReusableMethods.waitFor(1);   //DUZELTILMELI!!!!!!!!
         for (int i = 0; i < sortablePage.displayasGridItemList.size(); i++) {
-            // action.dragAndDrop(sortablePage.displayasGridItemList.get(i), sortablePage.displayasGridItemList.get(10)).build().perform();
-            action.clickAndHold(sortablePage.displayasGridItemList.get(i)).perform();
-            action.moveToElement(sortablePage.displayasGridItemList.get(10)).perform();
-            action.release().perform();
+            action.dragAndDrop(sortablePage.displayasGridItemList.get(i), sortablePage.displayasGridItemList.get(11)).build().perform();
+//            action.clickAndHold(sortablePage.displayasGridItemList.get(i)).
+//            moveToElement(sortablePage.displayasGridItemList.get(11)).
+//            release().build().perform();
             ReusableMethods.waitFor(2);
         }
 

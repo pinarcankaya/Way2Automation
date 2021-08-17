@@ -8,6 +8,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import pages.US_07_Accordion_Page;
@@ -29,7 +30,7 @@ public class US_10_Menu_Test {
     Set<String> windowsHandles ;
     List<String> list;
 
-    @BeforeTest
+    @BeforeClass
     public void setup() {
         Driver.getDriver().get(ConfigReader.getProperty("way2Automation_url"));
         Driver.getDriver().manage().window().maximize();
@@ -112,7 +113,7 @@ public class US_10_Menu_Test {
     }
     @AfterMethod
     public void tearDownMethod() {
-        Driver.getDriver().switchTo().parentFrame();
+        Driver.getDriver().switchTo().defaultContent();
     }
 
 }

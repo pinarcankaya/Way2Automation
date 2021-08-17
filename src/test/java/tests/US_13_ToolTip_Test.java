@@ -3,10 +3,7 @@ package tests;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 import pages.US_07_Accordion_Page;
 import pages.US_13_ToolTip_Page;
 import utilities.ConfigReader;
@@ -26,7 +23,7 @@ public class US_13_ToolTip_Test {
     Set<String> windowsHandles ;
     List<String> list;
 
-    @BeforeTest
+    @BeforeClass
     public void setup() {
         Driver.getDriver().get(ConfigReader.getProperty("way2Automation_url"));
         Driver.getDriver().manage().window().maximize();
@@ -98,6 +95,6 @@ public class US_13_ToolTip_Test {
 
     @AfterMethod
     public void tearDownMethod() {
-        Driver.getDriver().switchTo().parentFrame();
+        Driver.getDriver().switchTo().defaultContent();
     }
 }

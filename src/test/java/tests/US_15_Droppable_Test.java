@@ -6,6 +6,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.Color;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import pages.US_07_Accordion_Page;
@@ -26,7 +27,7 @@ public class  US_15_Droppable_Test {
     List<String> list;
 
 
-    @BeforeMethod
+    @BeforeClass
     public void setUp(){
         Driver.getDriver().get(ConfigReader.getProperty("way2Automation_url"));
         Driver.getDriver().manage().window().maximize();
@@ -141,7 +142,7 @@ public class  US_15_Droppable_Test {
 
     @AfterMethod
     public void tearDownMethod() {
-        Driver.getDriver().switchTo().window(list.get(0));
+        Driver.getDriver().switchTo().defaultContent();
     }
 
 

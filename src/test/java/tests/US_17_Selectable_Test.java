@@ -69,7 +69,6 @@ public class US_17_Selectable_Test {
 
         for (int i = 5; i < 12; i++) {
             selectable_page.displaySelectList.get(i).click();
-            ReusableMethods.waitFor(2);
             Assert.assertTrue(selectable_page.displaySelectList.get(i).isEnabled());
 
         }

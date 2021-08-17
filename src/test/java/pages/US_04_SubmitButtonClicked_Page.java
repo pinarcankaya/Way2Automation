@@ -7,20 +7,22 @@ import utilities.Driver;
 
 import java.util.List;
 
-public class US_04_Page {
-    public US_04_Page() {
+public class US_04_SubmitButtonClicked_Page {
+    public US_04_SubmitButtonClicked_Page() {
         PageFactory.initElements(Driver.getDriver(), this);
 
     }
+    @FindBy(xpath = "(//a[.='ENTER TO THE TESTING WEBSITE'])[2]")
+    public WebElement enterGiris;
 
     @FindBy(xpath = "//a[.='Dynamic Elements']")
     public WebElement dynamicElements;
 
-    @FindBy(xpath = "//a[.='Submit Button Clicked']")
+    @FindBy(xpath = "//h2[.='Submit Button Clicked']")
     public WebElement submitButtonMenu;
 
     @FindBy(xpath = "//ul[@class='responsive-tabs']/li")
-    public List<WebElement> submitButtonList;
+    public List<WebElement> tabList;
 
     //@FindBy(xpath = "//a[@target='_self']")
     //public List<WebElement> submitButtonList2;
