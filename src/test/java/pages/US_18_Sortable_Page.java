@@ -35,8 +35,8 @@ public class US_18_Sortable_Page {
     public List<WebElement> connectListSariItemList;
 
 
-//    @FindBy(xpath = "//ul[@id='sortable']/li")
-//    public List<WebElement> displayasGridItemList;
+    @FindBy(xpath = "//ul[@id='sortable']/li")
+    public List<WebElement> displayasGridItemList;
 
 
     @FindBy(xpath = "//a[.='Display as grid']")

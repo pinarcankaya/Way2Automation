@@ -12,21 +12,22 @@ public class US_06_Frames_Page {
     public US_06_Frames_Page(){
         PageFactory.initElements(Driver.getDriver(),this);
     }
-    @FindBy(xpath = "//a[.='Frames and Windows']")
-    public WebElement framesMenu;
 
+    @FindBy(xpath = "//h2[.='Frames and Windows']")
+    public WebElement framesUndWindowsMenu;
 
-    @FindBy(xpath = "//a[@target='_self']")
-    public List<WebElement> framesList;
+    @FindBy(xpath = "//a[@target='_self']")  ////a[contains(@href,'#example-1')]
+    public List<WebElement> tabs;
 
-    @FindBy(xpath = "//a[.='New Browser Tab']")
-    public  WebElement newWindow;
+    @FindBy(xpath = "//html")
+    public  WebElement newWindowTab;
 
     @FindBy(xpath = "//iframe[@class='demo-frame']")
+
     public WebElement firstFrame;
 
-    @FindBy(xpath = "//a[.='Open Seprate New Window']")
-    public WebElement openMenu;
+    @FindBy(xpath = "//div[@class='farme_window']/p/a")
+    public List<WebElement> openLinkList;
 
     @FindBy(xpath = "//a[.='Open New Seprate Window']")
     public WebElement openMenu2;

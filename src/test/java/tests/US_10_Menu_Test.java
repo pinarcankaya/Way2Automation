@@ -7,6 +7,7 @@ import org.openqa.selenium.support.Color;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import pages.US_07_Accordion_Page;
@@ -25,6 +26,8 @@ public class US_10_Menu_Test {
     US_10_Menu_Page menuPage = new US_10_Menu_Page();
     Actions action = new Actions(Driver.getDriver());
     WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 10);
+    Set<String> windowsHandles ;
+    List<String> list;
 
     @BeforeTest
     public void setup() {
@@ -32,11 +35,12 @@ public class US_10_Menu_Test {
         Driver.getDriver().manage().window().maximize();
         Driver.getDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         accordionPage.enterGiris.click();
-        ReusableMethods.waitFor(1);
+        ReusableMethods.waitFor(2);
         menuPage.menuLink.click();
-        ReusableMethods.waitFor(1);
-        Set<String> windowsHandle = Driver.getDriver().getWindowHandles();
-        List<String> list = new ArrayList<>(windowsHandle);
+
+        ReusableMethods.waitFor(2);
+        windowsHandles = Driver.getDriver().getWindowHandles();
+        list = new ArrayList<>(windowsHandles);
         Driver.getDriver().switchTo().window(list.get(1));
     }
 
@@ -66,7 +70,6 @@ public class US_10_Menu_Test {
         Driver.getDriver().switchTo().frame(0);
         System.out.println(menuPage.simpleMenuList.size());
         Assert.assertNotEquals(menuPage.simpleMenuList.size(), 6);  //8
-
     }
 
     @Test//Menu With Sub Menu basligi tiklandiginda Delphi Menu altindaki dort baslik oldugunu dogrulayiniz
@@ -85,8 +88,6 @@ public class US_10_Menu_Test {
             Assert.assertTrue(menuPage.subMenuList.get(i).isDisplayed());
         }
         Assert.assertEquals(delphiSubMenu.size(),4);
-
-
 
     }
 
@@ -107,8 +108,11 @@ public class US_10_Menu_Test {
         menuPage.selectMenu.click();
         Driver.getDriver().switchTo().frame(2);
         Assert.assertTrue(menuPage.selectMenuImage.isDisplayed());
+
     }
-
-
+    @AfterMethod
+    public void tearDownMethod() {
+        Driver.getDriver().switchTo().parentFrame();
+    }
 
 }
