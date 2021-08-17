@@ -31,7 +31,7 @@ public class US_05_DropDown_Page {
     @FindBy(xpath ="//a[@role='button']" )
     public WebElement asagiButton;
 
-    @FindBy(xpath ="//*[@role='tooltip']/div" )
+    @FindBy(xpath ="//div[@class='ui-tooltip-content']" )
     public WebElement showAllItems;
 
     @FindBy(xpath = "//select[@id='combobox']")

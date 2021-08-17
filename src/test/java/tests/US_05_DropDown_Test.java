@@ -27,7 +27,7 @@ public class US_05_DropDown_Test {
     Set<String> windowsHandles ;
     List<String> list;
 
-    @BeforeMethod
+    @BeforeClass
     public void setup() {
         Driver.getDriver().get(ConfigReader.getProperty("way2Automation_url"));
         Driver.getDriver().manage().window().maximize();
@@ -53,7 +53,7 @@ public class US_05_DropDown_Test {
         Select select = new Select(dropDownPage.select);
         List<WebElement> tumSecenekler = select.getOptions();
         for (WebElement w : tumSecenekler) {
-            System.out.println(w.getText());
+           // System.out.println(w.getText());
             Assert.assertTrue(w.isDisplayed());
         }
         String ilkSecenek = select.getFirstSelectedOption().getText();
@@ -100,9 +100,11 @@ public class US_05_DropDown_Test {
     public void TC34() {
         dropDownPage.enterCountry.click();
         Driver.driver.switchTo().frame(1);
+        ReusableMethods.waitFor(2);
         action.moveToElement(dropDownPage.asagiButton).build().perform();
+        ReusableMethods.waitFor(2);
         //1.Yol
-        Assert.assertTrue(dropDownPage.showAllItems.isDisplayed());
+       // Assert.assertTrue(dropDownPage.showAllItems.isDisplayed());
         //2.Yol
         Assert.assertEquals(dropDownPage.showAllItems.getText(), "Show All Items");
         System.out.println(dropDownPage.showAllItems.getText());
@@ -126,6 +128,6 @@ public class US_05_DropDown_Test {
     }
     @AfterMethod
     public void tearDownMethod() {
-        Driver.getDriver().switchTo().window(list.get(0));
+        Driver.getDriver().switchTo().defaultContent();
     }
 }

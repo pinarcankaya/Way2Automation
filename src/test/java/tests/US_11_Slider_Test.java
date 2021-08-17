@@ -6,6 +6,7 @@ import org.openqa.selenium.support.Color;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import pages.US_11_Slider_Page;
@@ -26,7 +27,7 @@ public class US_11_Slider_Test {
     Actions action = new Actions(Driver.getDriver());
     WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 10);
 
-    @BeforeTest
+    @BeforeClass
     public void setup() {
         Driver.getDriver().get(ConfigReader.getProperty("way2Automation_url"));
         Driver.getDriver().manage().window().maximize();
@@ -93,6 +94,6 @@ public class US_11_Slider_Test {
     }
     @AfterMethod
     public void tearDownMethod() {
-        Driver.getDriver().switchTo().parentFrame();
+        Driver.getDriver().switchTo().defaultContent();
     }
 }

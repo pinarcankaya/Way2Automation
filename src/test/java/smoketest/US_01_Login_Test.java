@@ -11,7 +11,7 @@ import utilities.TestBase;
 
 import java.util.concurrent.TimeUnit;
 
-public class US_01_Login_Test extends TestBase {
+public class US_01_Login_Test {
 
     US_01_Login_Page us01LoginPage = new US_01_Login_Page();
 

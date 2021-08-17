@@ -5,6 +5,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import pages.US_09_DatePicker_Page;
@@ -26,7 +27,7 @@ public class US_09_DatePicker_Test {
    Set<String> windowHandles;
     List<String> list;
 
-    @BeforeTest
+    @BeforeClass
     public void setup() {
         Driver.getDriver().get(ConfigReader.getProperty("way2Automation_url"));
         Driver.getDriver().manage().window().maximize();
@@ -111,6 +112,6 @@ public class US_09_DatePicker_Test {
     }
     @AfterMethod
     public void tearDownMethod() {
-        Driver.getDriver().switchTo().parentFrame();
+        Driver.getDriver().switchTo().defaultContent();
     }
 }

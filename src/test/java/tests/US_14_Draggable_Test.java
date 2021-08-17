@@ -25,7 +25,7 @@ public class US_14_Draggable_Test {
     US_14_Draggable_Page draggablePage = new US_14_Draggable_Page();
     Actions action = new Actions(Driver.getDriver());
     WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 10);
-    Set<String> windowsHandles ;
+    Set<String> windowsHandles;
     List<String> list;
 
     @BeforeClass

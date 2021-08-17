@@ -63,7 +63,7 @@ public class US_02_Alert_Test {
     public void TC_005() {
         //Texbox'a tikladiginizda Alert mesaj kutusunun aciliyor oldugunu dogrulayiniz
       ReusableMethods.waitFor(2);
-    //    Driver.getDriver().switchTo().frame(0);
+       Driver.getDriver().switchTo().frame(0);
         alertPage.simpleAlert.click();
         ReusableMethods.waitFor(2);
         String alertText = Driver.getDriver().switchTo().alert().getText();
@@ -77,7 +77,7 @@ public class US_02_Alert_Test {
     public void TC_006() {
         //ok butonuna tiklanabildigini assert ediniz
         ReusableMethods.waitFor(2);
-      //  Driver.getDriver().switchTo().frame(0);
+        Driver.getDriver().switchTo().frame(0);
         alertPage.simpleAlert.click();
         ReusableMethods.waitFor(2);
         Driver.getDriver().switchTo().alert().accept();
@@ -95,7 +95,6 @@ public class US_02_Alert_Test {
         System.out.println(asHexBefor);
         alertPage.inputMenu.click();
           Assert.assertTrue(alertPage.inputMenu.isEnabled());
-//        wait.until(ExpectedConditions.visibilityOf(alertPage.inputMenu));
         String rgbAfter= alertPage.inputMenu.getCssValue("background-color");
         String asHexAfter= Color.fromString(rgbBefor).asHex();
         System.out.println(asHexAfter);
@@ -103,8 +102,39 @@ public class US_02_Alert_Test {
         //maybe have a bug, i am try it tomorrow
     }
 
+    @Test
+    public void TC08() {
+        //"Click the button to demonstrate the input box" yazisini iceren textbox tiklanabildigini dogrulayiniz
+
+
+    }
+
+    @Test
+    public void TC09() {
+       //Cikan Alert kutucuguna "Harry Potter" ismini yazabildiginizi dogrulayiniz
+
+    }
+    @Test
+    public void TC10() {
+        //Allertte OK tusuna basildigini dogrulayiniz
+
+    }
+
+    @Test
+    public void TC11() {
+        //"Hello Harry Potter! How are you today?" yazisinin gorundugunu dogrulayiniz
+
+    }
+
+    @Test
+    public void TC12() {
+        //Allertte "Cancel" butonuna basilabildigini dogrulayiniz
+
+    }
+
+
     @AfterMethod
     public void tearDownMethod() {
-        Driver.getDriver().switchTo().parentFrame();
+        Driver.getDriver().switchTo().defaultContent();
     }
 }
