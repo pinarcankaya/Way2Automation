@@ -9,9 +9,9 @@ import java.util.List;
 
 
 public class US_02_Alert_Page {
-    public  US_02_Alert_Page(){
+    public US_02_Alert_Page() {
 
-        PageFactory.initElements(Driver.getDriver(),this);
+        PageFactory.initElements(Driver.getDriver(), this);
     }
 
     @FindBy(xpath = "//h2[.='Alert']")
@@ -20,52 +20,11 @@ public class US_02_Alert_Page {
     public WebElement alertHeader;
     @FindBy(xpath = "//button[.='Click the button to display an alert box:']")
     public WebElement simpleAlert;
-    @FindBy(xpath = "//script")
-    public WebElement alertText;
-    @FindBy(xpath = "//a[contains(@href,'#example')]")
+    @FindBy(xpath = "(//a[contains(@href,'#example')])[2]")
     public WebElement inputMenu;
-
-
-
-
-//    @FindBy(xpath = "//a[.='Simple Alert']")
-//    public WebElement simpleAlert;
-//
-//    @FindBy(xpath = "//iframe[@class='demo-frame']")
-//    public WebElement SimpleFrame;
-//
-//    @FindBy(xpath = "(//iframe[@class='demo-frame'])[2]")
-//    public WebElement inputFrame;
-//
-//    @FindBy(xpath = "//button[.='Click the button to display an alert box:']")
-//    public WebElement simpleAlertBttn;
-//
-//    @FindBy(xpath = "//a[.='Input Alert']")
-//    public WebElement inputAlert;
-//
-//    @FindBy(xpath = "//button[.='Click the button to demonstrate the Input box.']")
-//    public WebElement inputAlertBttn;
-//
-//    @FindBy(id="demo")
-//    public WebElement inputAlertText;
-//
-//    @FindBy(xpath = "//p[@id='demo']")
-//    public WebElement inputDogrulamaText;
-//
-//
-//
-//    @FindBy(xpath = "//a[.='Simple Alert']")
-//    public WebElement simpleAlertBaslik;
-//
-//
-//
-//
-//    @FindBy(xpath = "//ul[@id='toggleNav']/li")
-//    public List<WebElement> alertKutu;
-//
-//    @FindBy(xpath = "//iframe[@class='demo-frame']")
-//    public WebElement frame;
-
-
+    @FindBy(xpath = "//p[.='Hello Harry Potter! How are you today?']")
+    public WebElement haryPotreText;
+    @FindBy(xpath = "//button[.='Click the button to demonstrate the Input box.']")
+    public WebElement inputClickButton;
 
 }
