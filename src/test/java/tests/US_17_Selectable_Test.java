@@ -3,6 +3,8 @@ package tests;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.Color;
 import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import pages.US_07_Accordion_Page;
@@ -20,7 +22,7 @@ public class US_17_Selectable_Test {
     US_17_Selectable_Page selectable_page = new US_17_Selectable_Page();
     US_07_Accordion_Page accordionPage = new US_07_Accordion_Page();
 
-    @BeforeMethod
+    @BeforeClass
     public void setUP() {
         Driver.getDriver().get(ConfigReader.getProperty("way2Automation_url"));
         Driver.getDriver().manage().window().maximize();
@@ -128,5 +130,9 @@ public class US_17_Selectable_Test {
 //        System.out.println(textAfter);
 //        Assert.assertNotEquals(textBefore,textAfter);
 
+    }
+    @AfterMethod
+    public void dearDown(){
+        Driver.getDriver().close();
     }
 }

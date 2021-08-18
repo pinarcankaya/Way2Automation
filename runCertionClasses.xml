@@ -1,0 +1,14 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="Suit 2" verbose="2">
+    
+    <test name="Test 2">
+        <!-- Buradaki classlar zuhre tarafindan yazilan testler -->
+        <classes>
+            <class name="tests.US_02_Alert_Test"></class>
+            <class name="tests.US_12_Tabs_Test"></class>
+            <class name="tests.US_17_Selectable_Test"></class>
+        </classes>
+        
+    </test>
+    
+</suite>
