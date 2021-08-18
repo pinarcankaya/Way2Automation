@@ -17,7 +17,7 @@ public class US_12_Tabs_Page {
     @FindBy(xpath = "//h2[.='Tabs']")
     public WebElement tabsLink;
 
-    @FindBy(xpath = "//li[contains(@class,'ui-state-default ui-corner-top')]")
+    @FindBy(xpath = "//*[@id='tabs']/ul/li")
     public List<WebElement> tabsMenus;
 
    @FindBy(xpath = "//p[contains(text(),'Proin elit arcu')]")

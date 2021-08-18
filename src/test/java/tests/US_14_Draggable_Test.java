@@ -7,10 +7,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 import pages.US_07_Accordion_Page;
 import pages.US_14_Draggable_Page;
 import utilities.ConfigReader;
@@ -28,8 +25,10 @@ public class US_14_Draggable_Test {
     US_14_Draggable_Page draggablePage = new US_14_Draggable_Page();
     Actions action = new Actions(Driver.getDriver());
     WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 10);
+    Set<String> windowsHandles;
+    List<String> list;
 
-    @BeforeMethod
+    @BeforeClass
     public void setup() {
         Driver.getDriver().get(ConfigReader.getProperty("way2Automation_url"));
         Driver.getDriver().manage().window().maximize();
@@ -38,8 +37,8 @@ public class US_14_Draggable_Test {
         ReusableMethods.waitFor(1);
         draggablePage.draggableMenuLink.click();
         ReusableMethods.waitFor(1);
-        Set<String> windowsHandle = Driver.getDriver().getWindowHandles();
-        List<String> list = new ArrayList<>(windowsHandle);
+        windowsHandles = Driver.getDriver().getWindowHandles();
+        list = new ArrayList<>(windowsHandles);
         Driver.getDriver().switchTo().window(list.get(1));
     }
 
@@ -52,7 +51,6 @@ public class US_14_Draggable_Test {
         String style = draggablePage.dragMeBox.getAttribute("style");
         System.out.println(style);
         Assert.assertTrue(style.contains("inset: 150px auto auto 100px;"));
-        Driver.getDriver().switchTo().parentFrame();
     }
 
     // "I can be dragged only vertically" box'in sadece dikey yonlu ,"I can be dragged only horizontally
@@ -77,7 +75,6 @@ public class US_14_Draggable_Test {
         System.out.println(horizantalyBox);
 
         Assert.assertTrue(horizantalyBox.contains("left: 50px; top: 0px"));
-        Driver.getDriver().switchTo().parentFrame();
     }
 
     //Drag Box'lar hareket ettiginde cursor  turunun fare hareketine gore degistigini assert ediniz
@@ -106,7 +103,6 @@ public class US_14_Draggable_Test {
                 action.release().build().perform();
             }
         }
-        Driver.getDriver().switchTo().parentFrame();
     }
 
     //Drag Box suruklendiginde start,drag ve stop'taki sayilarin hareket miktarina gore arttigini assert ediniz
@@ -128,7 +124,6 @@ public class US_14_Draggable_Test {
                 && draggablePage.eventAllInvoked.get(1).getText().equals("2") &&
                 draggablePage.eventAllInvoked.get(2).getText().equals("2"));
 
-        Driver.getDriver().switchTo().parentFrame();
     }
 
     //"Drag me Down" box'in her suruklendiginde sayisinin arttigini assert ediniz(Ornek;5 kez suruklenip
@@ -147,11 +142,10 @@ public class US_14_Draggable_Test {
         System.out.println(draggablePage.dragMeDownButtonList.size());
         Assert.assertEquals(draggablePage.dragMeDownButtonList.size(), 6);//kaynak button ile bereber 6
 
-        Driver.getDriver().switchTo().parentFrame();
     }
 
-    @AfterClass
-    public void quit() {
-        Driver.closeDriver();
+    @AfterMethod
+    public void tearDownMethod() {
+        Driver.getDriver().switchTo().defaultContent();
     }
 }

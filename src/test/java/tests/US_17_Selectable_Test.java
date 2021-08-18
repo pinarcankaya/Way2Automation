@@ -21,6 +21,8 @@ import java.util.concurrent.TimeUnit;
 public class US_17_Selectable_Test {
     US_17_Selectable_Page selectable_page = new US_17_Selectable_Page();
     US_07_Accordion_Page accordionPage = new US_07_Accordion_Page();
+    Set<String> windowHandles;
+    List<String> list;
 
     @BeforeClass
     public void setUP() {
@@ -30,16 +32,16 @@ public class US_17_Selectable_Test {
         accordionPage.enterGiris.click();
         ReusableMethods.waitFor(2);
         selectable_page.selectableMenu.click();
-        Set<String> windowHandles = Driver.getDriver().getWindowHandles();
-        List<String> list = new ArrayList<>(windowHandles);
+        windowHandles = Driver.getDriver().getWindowHandles();
+        list = new ArrayList<>(windowHandles);
         Driver.getDriver().switchTo().window(list.get(1));
         ReusableMethods.waitFor(2);
 
     }
 
-    @Test
+    @Test   //Item 1'i seçtiginizde kutucugun renginin "#F39814" oldugunu  yazi renginin ise
+    // " white" oldugunu Assert ediniz.
     public void TC_090() {
-        //When you select Item 1, Assert that the color of the box is "#F39814" and the text color is "white". ==>Default Funktionality
         Driver.getDriver().switchTo().frame(0);
         selectable_page.itemList.get(0).click();
         String rgbColor = selectable_page.itemList.get(0).getCssValue("background-color");
@@ -51,15 +53,6 @@ public class US_17_Selectable_Test {
         Assert.assertTrue(asHexBackground.contains("#f39814") && colorWhite.contains("#ffffff"));
 
     }
-
-
-
-
-
-
-
-
-
 
     @Test
     public void TC_091() {
@@ -76,7 +69,6 @@ public class US_17_Selectable_Test {
 
         for (int i = 5; i < 12; i++) {
             selectable_page.displaySelectList.get(i).click();
-            ReusableMethods.waitFor(2);
             Assert.assertTrue(selectable_page.displaySelectList.get(i).isEnabled());
 
         }
@@ -112,27 +104,29 @@ public class US_17_Selectable_Test {
     @Test
     public void TC_094() {
         //Kutu seçiminden önce ve sonra"You've selected: "yazısının karşısındaki değişimi assert ediniz
-        ReusableMethods.waitFor(3);
+        ReusableMethods.waitFor(2);
         selectable_page.tabsList.get(2).click();
         Driver.getDriver().switchTo().frame(2);
         ReusableMethods.waitFor(2);
         String textBefore = selectable_page.serializeText.getText();
         System.out.println(textBefore);
-        selectable_page.itemList.get(0).click();
         ReusableMethods.waitFor(2);
-        for (WebElement w : selectable_page.itemList) {
-            w.click();
+        for (int i = 8; i <selectable_page.itemList.size() ; i++) {
+            selectable_page.itemList.get(i).click();
+
+            ReusableMethods.waitFor(1);
             String textAfter = selectable_page.serializeText.getText();
             System.out.println(textAfter);
-            Assert.assertNotEquals(textBefore, textAfter);
+            ReusableMethods.waitFor(2);
+            Assert.assertNotEquals(textBefore,textAfter);
         }
-        // String textAfter=selectable_page.serializeText.getText();
+//         String textAfter=selectable_page.serializeText.getText();
 //        System.out.println(textAfter);
 //        Assert.assertNotEquals(textBefore,textAfter);
 
     }
     @AfterMethod
-    public void dearDown(){
-        Driver.getDriver().close();
+    public void tearDownMethod() {
+        Driver.getDriver().switchTo().defaultContent();
     }
 }

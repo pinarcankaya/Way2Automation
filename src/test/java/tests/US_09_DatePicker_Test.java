@@ -1,8 +1,11 @@
 package tests;
 
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import pages.US_09_DatePicker_Page;
@@ -20,31 +23,38 @@ public class US_09_DatePicker_Test {
 
     US_09_DatePicker_Page datePickerPage = new US_09_DatePicker_Page();
     US_07_Accordion_Page accordionPage = new US_07_Accordion_Page();
-   // Actions action = new Actions(Driver.getDriver());
+    Actions action = new Actions(Driver.getDriver());
+   Set<String> windowHandles;
+    List<String> list;
 
-    @BeforeTest
+    @BeforeClass
     public void setup() {
         Driver.getDriver().get(ConfigReader.getProperty("way2Automation_url"));
         Driver.getDriver().manage().window().maximize();
         Driver.getDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         accordionPage.enterGiris.click();
-        ReusableMethods.waitFor(1);//thread sleep
+        ReusableMethods.waitFor(2);//thread sleep
         datePickerPage.datapickerMenu.click();
         ReusableMethods.waitFor(1);
-        Set<String> windowsHandle = Driver.getDriver().getWindowHandles();
-        List<String> list = new ArrayList<>(windowsHandle);
+        windowHandles = Driver.getDriver().getWindowHandles();
+         list = new ArrayList<>(windowHandles);
         Driver.getDriver().switchTo().window(list.get(1));
+        ReusableMethods.waitFor(2);
     }
 
-    @Test
+    @Test //1)Date Picker basligi altindaki Default Functionality tiklanmali,
+    // Date box tiklandiginda tarih gorunmeli,Tarih secilebilmeli
     public void defaultFonk() {
-        Driver.getDriver().switchTo().frame(0);
+        datePickerPage.defauldMenu.click();
+        Driver.driver.switchTo().frame(0);
         datePickerPage.dataInputList.get(0).click();
         Assert.assertTrue(datePickerPage.dateTitle.isDisplayed());
         datePickerPage.dataInputList.get(0).sendKeys("05/05/2050");
     }
 
-    @Test
+    @Test  //1)Wigdet basligi altindaki Animasyon tiklanmali
+//Animasyon tiklandiginda Animasyon textbox (dropdown)gorunuyor oldugunu dogrulayiniz
+//Dropdowndan drop animation secilebiyor oldugunu dogrulayiniz
     public void animationMenu() {
         datePickerPage.animationMenu.click();
         Driver.getDriver().switchTo().frame(1);
@@ -60,7 +70,8 @@ public class US_09_DatePicker_Test {
         Assert.assertEquals(actualResult, expectedResult);
     }
 
-    @Test
+    @Test  //1)Date Picker basligi altindaki Display Month & Year kutusu tiklanmali
+//Date textbox'u tiklandiginda ay ve yil gorunmel ,Ay ve yil secilebilmeli
     public void displayMonthYear() {
         datePickerPage.displayMonthYearMenu.click();
         Driver.getDriver().switchTo().frame(2);
@@ -83,7 +94,8 @@ public class US_09_DatePicker_Test {
 
     }
 
-    @Test
+    @Test  //1)Wigdet basligi altindaki Format Date tiklanmali,Fomat Date tiklandiginda option gorunuyor olmali
+           //Format option  full secenegi secildigindeyeni formatta date yazdigini dogrulayiniz
     public void formatDate() {
         datePickerPage.formatDateMenu.click();
         Driver.getDriver().switchTo().frame(3);
@@ -97,5 +109,9 @@ public class US_09_DatePicker_Test {
         for(WebElement w: formatDate.getOptions() ){  //tum elementleri getirir
             System.out.println(w.getText());
         }
+    }
+    @AfterMethod
+    public void tearDownMethod() {
+        Driver.getDriver().switchTo().defaultContent();
     }
 }

@@ -5,6 +5,7 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
@@ -22,6 +23,8 @@ public class US_07_Accordion_Tests {
 
     US_07_Accordion_Page accordionPage = new US_07_Accordion_Page();
     Actions action = new Actions(Driver.getDriver());
+    Set<String> windowsHandles ;
+    List<String> list;
 
     @BeforeTest
     public void testName() {
@@ -31,8 +34,11 @@ public class US_07_Accordion_Tests {
         accordionPage.enterGiris.click();
         ReusableMethods.waitFor(2);
         accordionPage.accordionMenu.click();
-        ReusableMethods.waitFor(2);
 
+        windowsHandles = Driver.getDriver().getWindowHandles();///2 tane window var
+        list = new ArrayList<>(windowsHandles);
+        Driver.getDriver().switchTo().window(list.get(1));//child windowa gitmek istiyoruz//yani 2.siradaki
+        ReusableMethods.waitFor(2);
     }
 
     ///WINDOWS HANDLE
@@ -40,14 +46,9 @@ public class US_07_Accordion_Tests {
     // Default Functionality'de herbir section tiklandiginda icerdigi text'e ulasilmalidir
     // Default Functionality'e tiklandiginda Section 1-2-3-4 acildigi gorulmelidir
     public void defaultFunkcionality() {//
-        Set<String> windowsHandle = Driver.getDriver().getWindowHandles();///2 tane window var
-        List<String> list = new ArrayList<>(windowsHandle);
-        Driver.getDriver().switchTo().window(list.get(1));//child windowa gitmek istiyoruz//yani 2.siradaki
 
-
-        ReusableMethods.waitFor(2);
-        accordionPage.defaultFonkMenu.click();
-
+//        ReusableMethods.waitFor(2);
+//        accordionPage.defaultFonkMenu.click();
 
         Driver.getDriver().switchTo().frame(0);
 
@@ -76,18 +77,16 @@ public class US_07_Accordion_Tests {
         Assert.assertFalse(section1.isEmpty());
 
         //Assertion 3.yol
-        Assert.assertTrue(accordionPage.selectionList.get(0).getText().
-                startsWith("Mauris mauris ante") && accordionPage.selectionList.get(0).getText().
-                endsWith("vulputate."));
+//        ReusableMethods.waitFor(2);
+//        Assert.assertTrue(accordionPage.selection1Text.getText().
+//                startsWith("Mauris mauris ante") && accordionPage.selection1Text.getText().
+//                endsWith("vulputate."));
     }
 
 
     @Test
     public void customizeIcons() {//"toggle icons" butonuna sayfada bulunmali ve  tiklandiginda islevsel olmalidir
-        Set<String> windowsHandle = Driver.getDriver().getWindowHandles();
-        List<String> list = new ArrayList<>(windowsHandle);
-        Driver.getDriver().switchTo().window(list.get(1));
-        ReusableMethods.waitFor(2);
+        ReusableMethods.waitFor(1);
         accordionPage.customizeIcons.click();
 
         Driver.getDriver().switchTo().frame(1);
@@ -111,13 +110,9 @@ public class US_07_Accordion_Tests {
 
     @Test
     public void fillspace() {
-        Set<String> windowsHandle = Driver.getDriver().getWindowHandles();
-        List<String> list = new ArrayList<>(windowsHandle);
-        Driver.getDriver().switchTo().window(list.get(1));
 
 
-        ReusableMethods.waitFor(2);
-        accordionPage.fillspace.click();
+        ReusableMethods.waitForClickablility(accordionPage.fillspace,2);
         Driver.getDriver().switchTo().frame(2);
 
         action.sendKeys(Keys.ARROW_DOWN).perform();
@@ -148,5 +143,9 @@ public class US_07_Accordion_Tests {
         moveToElement (toElement) : Fareyi öğenin merkezine kaydırır.
         release () : Mevcut fare konumunda basılı sol fare düğmesini serbest bırakır.
         */
+    }
+    @AfterMethod
+    public void tearDownMethod() {
+        Driver.getDriver().switchTo().window(list.get(0));
     }
 }
